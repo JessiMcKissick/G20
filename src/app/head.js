@@ -10,4 +10,4 @@ function header(){
     
     $h(1,logo,'G20 Character Sheet','','headTitle');
 
-}
+} 

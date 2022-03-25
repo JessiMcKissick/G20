@@ -5,4 +5,4 @@ function home(){
         $hr(con, 'divider', '')
         $b(con,'New Sheet', function(){newSheet()},'button','');
         $b(con,'Load Sheet',function(){loadSheets()}, 'button', '');
-}
+} 
