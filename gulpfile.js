@@ -27,7 +27,7 @@ gulp.task('sass', async function () {
 
 gulp.task('compress', async function () {
     gulp.src(['src/app/*.js'], { allowEmpty: true })
-        .pipe(minify({ noSource: true }))
+        .pipe(minify({ noSource: true}))
         .pipe(gulp.dest('public/app'));
 });
 gulp.task('compressLocal', async function () {
