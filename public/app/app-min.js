@@ -1,0 +1,1 @@
+function router(){1==isHome?home():1==isNew?(pullID("content").remove(),engine()):isLoad}header();

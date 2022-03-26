@@ -1,52 +1,50 @@
-// var gulp = require('gulp');
-// var browserSync = require('browser-sync').create();
-
-// // Static server
-// gulp.task('browser-sync', function () {
-//     browserSync.init({
-//         server: {
-//             baseDir: "./src/index.html"
-//         }
-//     });
-// });
-
-
-
-
 var gulp = require('gulp');
-var sass = require('gulp-sass');
+var sass = require('gulp-sass')(require('sass'));
 var browserSync = require('browser-sync').create();
 const minify = require('gulp-minify');
 
 gulp.task('dev', function () {
     browserSync.init({
         server: {
-            baseDir: "./src"
+            baseDir: "./public"
         },
-        files: ['index.html', 'app/*.js']
+        files: ['index.html', 'app/*.js', '*.js', 'style/main.scss']
     });
-    gulp.watch("style/*.scss", gulp.series('sass'));
-    gulp.watch('app/*.js', gulp.series('compress'));
+    gulp.watch("src/style/*.scss", gulp.series('sass'));
+    gulp.watch('src/app/*.js', gulp.series('compress'));
+    gulp.watch('src/solomon/*.js', gulp.series('compressLib'))
+    gulp.watch('src/*.js', gulp.series('compressLocal'));
+    gulp.watch('src/*.html', gulp.series('html'));
     gulp.watch("*.html").on('change', browserSync.reload);
-    gulp.watch('*.html')
-        .on('change', gulp.series('html'));
 });
 
-gulp.task('sass', function () {
-    return gulp.src("./src/style/*.scss")
+gulp.task('sass', async function () {
+    return gulp.src("src/style/*.scss")
         .pipe(sass())
-        .pipe(gulp.dest("../public/style"))
+        .pipe(gulp.dest("public/style/style.css"))
         .pipe(browserSync.stream());
 });
 
 gulp.task('compress', async function () {
-    gulp.src(['app/*.js'])
-        .pipe(minify())
-        .pipe(gulp.dest('./public'));
+    gulp.src(['src/app/*.js'], { allowEmpty: true })
+        .pipe(minify({ noSource: true }))
+        .pipe(gulp.dest('public/app'));
+});
+gulp.task('compressLocal', async function () {
+    gulp.src(['src/*.js'], { allowEmpty: true, min: '' })
+        .pipe(minify({ noSource: true }))
+        .pipe(gulp.dest('public'));
+});
+gulp.task('compressLib', async function () {
+    gulp.src(['src/solomon/*.js'], { allowEmpty: true, min: '' })
+        .pipe(minify({ noSource: true }))
+        .pipe(gulp.dest('public'));
 });
 
+
+
 gulp.task('html', async function(){
-    gulp.src(['src/*.html'])
+    gulp.src(['src/*.html'],)
         .pipe(gulp.dest('public'))
         .pipe(browserSync.stream());
 });

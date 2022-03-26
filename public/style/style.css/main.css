@@ -1,0 +1,10 @@
+body {
+  background-color: white;
+}
+
+.subGrid {
+  width: 30vw;
+  margin: 0px;
+  padding: 0px;
+  float: left;
+}

@@ -1,0 +1,1 @@
+function home(){$d(body,"","content");let e=pullID("content");$h(2,e,"Character Sheets","","homeTitle"),$hr(e,"divider",""),$b(e,"New Sheet",function(){newSheet()},"button",""),$b(e,"Load Sheet",function(){loadSheets()},"button","")}

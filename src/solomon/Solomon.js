@@ -133,7 +133,6 @@ let $form = (t,cn,id,action,method,name) => {
 }
 
 let $input = (t,c,cn,id,type,name,label) => {
-    console.log(label);
     $p(t,label,cn,id);
     $g(t,"input",c,id,cn,"",type,name);
 }

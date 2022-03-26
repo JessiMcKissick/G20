@@ -1,0 +1,1 @@
+function newSheet(){console.log("new"),isHome=!1,isNew=!0,router()}function loadSheets(){console.log("load")}function exportFunc(){}function importFunc(){}
