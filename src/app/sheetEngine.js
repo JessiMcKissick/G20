@@ -24,6 +24,7 @@ const defPointsBase = 15;
 const supPointsBase = 15;
 var defPoints = 15;
 var supPoints = 15;
+var auxPoints = 30;
 let offPointMax = 10;
 let defPointMax = 10;
 let supPointMax = 10;
@@ -43,10 +44,10 @@ function engine(type){
         let con = pullID('content'); 
         $form(con, '', 'sheet', console.log('test?'))
         let form = pullID('sheet');
-        $input(form, 'Name', 'sheetData','','text','sheetName','Character Name');
+        $input(form, 'Name', 'sheetData','charName','text','sheetName','Character Name', '');
         $hr(form,'','');
-        $input(form, 'HP','sheetData','','text','sheetHP','HP');
-        $input(form, 'Armor', 'sheetData','','text','sheetArm','Armor');
+        $input(form, 'HP','sheetData','charHP','text','sheetHP','HP', 'true');
+        $input(form, 'Armor', 'sheetData','charArmor','text','sheetArm','Armor', 'true');
         $hr(form,'','');
         $d(form, 'contentGrid','stats'); let grid = pullID('stats');
         $d(grid, 'subGrid', 'offenseGrid'); let ofGrid = pullID('offenseGrid');
@@ -112,25 +113,24 @@ function engine(type){
 
 var num = 0;
 function update(type, id){
+
     var num = 0;
     let offText = pullID('offPointCounter');
     let defText = pullID('defPointCounter');
     let supText = pullID('supPointCounter')
-    if(type == 'off'){
+    if(type == 'off' && (offPoints + auxPoints) > 0){
         for(let i = 0; i < offSkillID.length; i++){
             num = (num + parseInt(pullID(offSkillID[i]).value));
         }
         offPoints = offPointsBase - num;
         offText.innerText = 'Points: ' + offPoints;
-    } else if(type == 'def'){
+    } else if (type == 'def' && (defPoints + auxPoints) > 0){
         for (let i = 0; i < defSkillID.length; i++) {
             num = (num + parseInt(pullID(defSkillID[i]).value));
         }
         defPoints = defPointsBase - num;
         defText.innerText = 'Points: ' + defPoints;
-    } else if(type == 'sup'){
-        console.log('sup')
-        console.log(supSkillID)
+    } else if (type == 'sup' && (supPoints + auxPoints) > 0){
         for (let i = 0; i < supSkillID.length; i++) {
             num = (num + parseInt(pullID(supSkillID[i]).value));
         }
@@ -138,3 +138,4 @@ function update(type, id){
         supText.innerText = 'Points: ' + supPoints;
     }
 }
+

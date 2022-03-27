@@ -37,6 +37,9 @@ let $g = (target, type, arg, id, cname, alt, s1, s2, s3) => {
         if(s2 !== undefined){
             newEl.name=s2;
         }; 
+        if(s3 == 'true'){
+            newEl.disabled = true;
+        };
     };
     if (type === "script") {
         newEl.src = alt;
@@ -132,9 +135,9 @@ let $form = (t,cn,id,action,method,name) => {
     $g(t,"form","",id,cn,"",action,method,name);
 }
 
-let $input = (t,c,cn,id,type,name,label) => {
+let $input = (t,c,cn,id,type,name,label,isEnabled) => {
     $p(t,label,cn,id);
-    $g(t,"input",c,id,cn,"",type,name);
+    $g(t,"input",c,id,cn,"",type,name,isEnabled);
 }
 
 let $b = (t,c,oc,cn,id) => {
