@@ -13,6 +13,13 @@ let pullCN = (target) => {
     let tar = document.getElementsByClassName(target);
     return tar;
 };
+let val = (id, inpval) => {
+    if(inpval != undefined && inpval != ''){
+        pullID(id).value = inpval;
+    } else {
+        return pullID(id).value;
+    }
+}
 let body = pullID('root');
 //Grabs the root for future use
 
@@ -136,7 +143,7 @@ let $form = (t,cn,id,action,method,name) => {
 }
 
 let $input = (t,c,cn,id,type,name,label,isEnabled) => {
-    $p(t,label,cn,id);
+    $p(t,label,cn,id + 'label');
     $g(t,"input",c,id,cn,"",type,name,isEnabled);
 }
 

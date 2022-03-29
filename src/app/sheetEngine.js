@@ -37,7 +37,7 @@ var offSkillID = []
 var defSkillID = []
 var supSkillID = []
 
-function engine(type){
+function engine(type){ // Core sheet generation and assignment engine
     
     $d(body, '', 'content');
     $h(3, pullID('header'),'Auxilary points: ' + auxCount,'','auxCounter');
@@ -101,6 +101,7 @@ function engine(type){
         // TODO: Rest of stats, refer to   google sheet. Also, add a section for their 5 base feats and any bonus feats.
         // Css grid time! each column, all items classed as columnBlah, E.G. columnOffense
 
+        updateData();
     if(type == '1'){
         // new
 
@@ -112,15 +113,20 @@ function engine(type){
 
 
 var num = 0;
-function update(type, id){
+function update(type, id){ // Main sheet update function
 
     var num = 0;
     let offText = pullID('offPointCounter');
     let defText = pullID('defPointCounter');
-    let supText = pullID('supPointCounter')
+    let supText = pullID('supPointCounter');
+    // Figure a way to generic this functionality VVVVV
     if(type == 'off' && (offPoints + auxPoints) > 0){
         for(let i = 0; i < offSkillID.length; i++){
-            num = (num + parseInt(pullID(offSkillID[i]).value));
+            if(offSkillID[i].value >8){
+                num = (num + parseInt(pullID(offSkillID[i]).value));
+            } else {
+                num = (num + parseInt(pullID(offSkillID[i]).value));
+            }
         }
         offPoints = offPointsBase - num;
         offText.innerText = 'Points: ' + offPoints;
@@ -137,5 +143,13 @@ function update(type, id){
         supPoints = supPointsBase - num;
         supText.innerText = 'Points: ' + supPoints;
     }
+    updateData();
+};
+
+function updateData(){ // Updates all state-specific text
+    val('charHP', Math.floor((val('selerDe0') / 2) + 5));
+    val('charArmor', val('selerDe2'));
 }
 
+
+// Change skill algorithm to accomodate for the avove 8 rule
