@@ -114,34 +114,14 @@ function engine(type){ // Core sheet generation and assignment engine
 
 var num = 0;
 function update(type, id){ // Main sheet update function
-
-    var num = 0;
-    let offText = pullID('offPointCounter');
     let defText = pullID('defPointCounter');
     let supText = pullID('supPointCounter');
-    // Figure a way to generic this functionality VVVVV
     if(type == 'off' && (offPoints + auxPoints) > 0){
-        for(let i = 0; i < offSkillID.length; i++){
-            if(offSkillID[i].value >8){
-                num = (num + parseInt(pullID(offSkillID[i]).value));
-            } else {
-                num = (num + parseInt(pullID(offSkillID[i]).value));
-            }
-        }
-        offPoints = offPointsBase - num;
-        offText.innerText = 'Points: ' + offPoints;
+        updateAssist('off'); 
     } else if (type == 'def' && (defPoints + auxPoints) > 0){
-        for (let i = 0; i < defSkillID.length; i++) {
-            num = (num + parseInt(pullID(defSkillID[i]).value));
-        }
-        defPoints = defPointsBase - num;
-        defText.innerText = 'Points: ' + defPoints;
+        updateAssist('def');
     } else if (type == 'sup' && (supPoints + auxPoints) > 0){
-        for (let i = 0; i < supSkillID.length; i++) {
-            num = (num + parseInt(pullID(supSkillID[i]).value));
-        }
-        supPoints = supPointsBase - num;
-        supText.innerText = 'Points: ' + supPoints;
+        updateAssist('sup');
     }
     updateData();
 };
@@ -149,7 +129,25 @@ function update(type, id){ // Main sheet update function
 function updateData(){ // Updates all state-specific text
     val('charHP', Math.floor((val('selerDe0') / 2) + 5));
     val('charArmor', val('selerDe2'));
+};
+
+let updateAssist = (type) => {
+    var typePoints = eval(type+'Points');
+
+    var num = 0;
+    let data = eval(type+'SkillID');
+    var poinTexBase = eval(type + 'PointCounter')
+    for (let i = 0; i < data.length; i++) {
+        let inp = parseInt(pullID(data[i]).value);
+        if (inp < 9) {
+            num = (num + inp);
+        } else if (inp == 9) {
+            num = (num + inp) + 1;
+        } else if (inp == 10) {
+            num = (num + inp) + 4;
+        }
+    }
+    let pBase = eval(type+'PointsBase');
+    typePoints = pBase - num;
+    poinTexBase.innerText = 'Points: ' + typePoints;
 }
-
-
-// Change skill algorithm to accomodate for the avove 8 rule
