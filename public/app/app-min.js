@@ -1,1 +1,1 @@
-function router(){1==isHome?home():1==isNew?(pullID("content").remove(),engine()):isLoad}header();
+function router(inp){1==isHome?(home(),winLoc("home")):1==isNew?(clear(),engine(),winLoc("new")):1==isLoad?winLoc("load"):1==isApplet&&(clear(),toonApps(),winLoc("applets")),null!=inp&&(clear(),eval(inp),winLoc(inp))}function clear(){pullID("content").remove()}function page(){return $d(body,"","content"),pullID("content")}function winLoc(n){window.location.hash=n}header(),footer();

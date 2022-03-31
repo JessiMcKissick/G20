@@ -1,1 +1,1 @@
-function home(){$d(body,"","content");let e=pullID("content");$h(2,e,"Character Sheets","","homeTitle"),$hr(e,"divider",""),$b(e,"New Sheet",function(){newSheet()},"button",""),$b(e,"Load Sheet",function(){loadSheets()},"button","")}
+function home(){$d(body,"","content");let t=pullID("content");$h(2,t,"Character Sheets","","homeTitle"),$hr(t,"divider",""),$b(t,"New Sheet",function(){newSheet()},"button",""),$b(t,"Load Sheet",function(){loadSheets()},"button",""),$b(t,"Character apps",function(){loadApplets()},"button","")}
