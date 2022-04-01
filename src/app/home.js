@@ -6,4 +6,5 @@ function home(){
         $b(con, 'New Sheet', function () { router('engine()')},'button','');
         $b(con,'Load Sheet',function(){router('engine("load")')}, 'button', '');
         $b(con,'Character apps', function(){router('applets()')}, 'button','');
+        $b(con,'Delete Sheet', function(){localStorage.clear()});
 } 

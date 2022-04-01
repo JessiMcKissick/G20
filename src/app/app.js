@@ -18,6 +18,8 @@ function router(inp){
     } else {
 
     }
+    pullID('footer').remove();
+    footer();
 
 } 
 // okay SO , change winlocs to function names, set current page var to same as winloc, check current page vs win location in route check

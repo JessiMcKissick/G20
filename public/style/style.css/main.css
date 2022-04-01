@@ -3,8 +3,15 @@ body {
 }
 
 .subGrid {
-  width: 30vw;
+  width: 32vw;
   margin: 0px;
   padding: 0px;
   float: left;
+}
+
+#footer {
+  width: 100vw !important;
+  text-align: center;
+  display: block;
+  float: right;
 }

@@ -38,7 +38,7 @@ var defSkillID = []
 var supSkillID = []
 
 function engine(type){ // Core sheet generation and assignment engine
-    
+    // TODO: Add system for using aux points after regular is exhausted.
     $d(body, '', 'content');
     $h(3, pullID('header'),'Auxilary points: ' + auxCount,'','auxCounter');
         let con = pullID('content'); 
@@ -80,7 +80,6 @@ function engine(type){ // Core sheet generation and assignment engine
             pullID('selerDe' + i).onchange = function () {
                 update('def', ('selerDe' + i));
             };
-            // $input(deGrid, '', 'columnDefense', 'def' + i, 'text', '', itemList[(i + 11)]);
         };
         for (let i = 0; i < 12; i++) {
             $p(suGrid, itemList[(i + 21)]);
@@ -92,18 +91,14 @@ function engine(type){ // Core sheet generation and assignment engine
             for (let e = 0; e <= supPointMax; e++) {
                 $opt(suSel, e, '', '');
             }
-            // $input(suGrid, '', 'columnSupport', 'sup' + i, 'text', '', itemList[(i + 21)]);
             
             
         };
 
 
-        // TODO: Rest of stats, refer to   google sheet. Also, add a section for their 5 base feats and any bonus feats.
-        // Css grid time! each column, all items classed as columnBlah, E.G. columnOffense
 
         updateData();
     if(type == '1'){
-        // new
 
     } else if(type == 'load'){
         load();
@@ -146,17 +141,18 @@ function load(){
     let off = JSON.parse(localStorage.getItem('offense'));
     let def = JSON.parse(localStorage.getItem('defense'));
     let sup = JSON.parse(localStorage.getItem('support'));
-    console.log(off.length);
-    for(let i = 0; i < off.length; i++){
-        pullID('selerOf' + [i]).value = off[i];
+    if(off != undefined){
+        for(let i = 0; i < off.length; i++){
+            pullID('selerOf' + [i]).value = off[i];
+        }
+        for (let i = 0; i < def.length; i++) {
+            pullID('selerDe' + [i]).value = def[i];
+        }
+        for (let i = 0; i < sup.length; i++) {
+            pullID('selerSu' + [i]).value = sup[i];
+        }
+        pullID('charName').value = lo('name');
     }
-    for (let i = 0; i < def.length; i++) {
-        pullID('selerDe' + [i]).value = def[i];
-    }
-    for (let i = 0; i < sup.length; i++) {
-        pullID('selerSu' + [i]).value = sup[i];
-    }
-    pullID('charName').value = lo('name');
     updateData();
     updateAssist('off');
     updateAssist('def');
