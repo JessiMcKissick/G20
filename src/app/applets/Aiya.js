@@ -4,10 +4,11 @@ var nuggetNeed = 0;
 var glassState = 0;
 
 function Aiya() {
+    nuggetNeed = localStorage.getItem('aiyaNug');
     let con = page();
     $h(2, con, 'Aiya nugget generation needs', '', '');
     $hr(con);
-    $h(3, con, 'Nuggets to safe: 0', '', 'ticker');
+    $h(3, con, 'Nuggets to safe: ' + nuggetNeed, '', 'ticker');
     $h(3,con,'Glasses are: Off','','glassText')
     $b(con, 'Create A Nugget', function () { nuggetGen(1) }, '', '');
     $b(con, 'Create 10 Nugget', function () { nuggetGen(10) }, '', '');
@@ -31,6 +32,7 @@ async function adder() {
                 pullID('ticker').innerText = "Nuggets to safe: " + nuggetNeed;
             }
         }
+        localStorage.setItem('aiyaNug', nuggetNeed);
     }
 }
 
@@ -43,6 +45,8 @@ function nuggetGen(n){
         pullID('ticker').innerText = "Nuggets to safe: " + nuggetNeed;
 
     }
+    localStorage.setItem('aiyaNug', nuggetNeed);
+
 }
 
 function glassTog(){

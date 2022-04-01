@@ -5,10 +5,12 @@ var aquaAether = 500;
 var isBurn = false;
 
 function Alaqua() {
+    let data = localStorage.getItem('aquaState')
+    aquaAether = parseInt(data).toFixed(1);
     let con = page();
     $h(2, con, 'Alaquas Aether burn-down', '', '');
     $hr(con);
-    $h(3, con, 'Aether: 500', '', 'ticker');
+    $h(3, con, 'Aether: ' + aquaAether, '', 'ticker');
     $h(4, con, 'Is Burning: No', '', 'burnState');
     $b(con,'Burn toggle', function(){burnToggle()},);
     $b(con,'Nugget',function(){ nugget() },'','');
@@ -63,15 +65,17 @@ async function subtractor(){
                 pullID('ticker').innerText = 'EMERGENCY';
             }
         }
+        localStorage.setItem('aquaState', aquaAether);
     }
 }
 
 function nugget(){
-    console.log("nuggetB")
     if(aquaAether < 3925){
         aquaAether += 75;
         numUpd()
     }
+    localStorage.setItem('aquaState', aquaAether);
+
 }
 
 function crystal(){
@@ -79,6 +83,8 @@ function crystal(){
         aquaAether += 200;
         numUpd()
     }
+    localStorage.setItem('aquaState', aquaAether);
+
 }
 
 function vampire(){
@@ -86,6 +92,8 @@ function vampire(){
         aquaAether += 500;
         numUpd()
     }
+    localStorage.setItem('aquaState', aquaAether);
+
 }
 
 function food(){
@@ -93,6 +101,8 @@ function food(){
         aquaAether += 20;
         numUpd()
     }
+    localStorage.setItem('aquaState', aquaAether);
+
 }
 
 function burnToggle(){

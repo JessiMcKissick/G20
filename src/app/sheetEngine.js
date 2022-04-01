@@ -42,7 +42,7 @@ function engine(type){ // Core sheet generation and assignment engine
     $d(body, '', 'content');
     $h(3, pullID('header'),'Auxilary points: ' + auxCount,'','auxCounter');
         let con = pullID('content'); 
-        $form(con, '', 'sheet', console.log('test?'))
+        $form(con, '', 'sheet')
         let form = pullID('sheet');
         $input(form, 'Name', 'sheetData','charName','text','sheetName','Character Name', '');
         $hr(form,'','');
@@ -98,11 +98,7 @@ function engine(type){ // Core sheet generation and assignment engine
 
 
         updateData();
-    if(type == '1'){
-
-    } else if(type == 'load'){
-        load();
-    }
+    
     $hr(con)
     $b(con,'Save Data',function(){save()});
 }
@@ -138,6 +134,7 @@ function save(){
 }
 
 function load(){
+    engine();
     let off = JSON.parse(localStorage.getItem('offense'));
     let def = JSON.parse(localStorage.getItem('defense'));
     let sup = JSON.parse(localStorage.getItem('support'));
