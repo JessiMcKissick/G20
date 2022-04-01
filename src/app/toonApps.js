@@ -5,7 +5,7 @@ let listApp = [
 
 var tick = 0;
 
-function toonApps() {
+function applets() {
     let con = page();
     $h(2, con, 'Character Apps', '', 'appsTitle');
     $hr(con, 'divider', '')

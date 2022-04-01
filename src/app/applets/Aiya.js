@@ -1,4 +1,4 @@
-let AiyaTick = window.setInterval(adder, 20689);
+let AiyaTick = window.setInterval(adder, 187500);
 
 var nuggetNeed = 0;
 var glassState = 0;
@@ -17,14 +17,14 @@ function Aiya() {
 async function adder() {
     if(window.location.hash == '#Aiya()'){
         if(glassState == 0){
-            if(nuggetNeed >= 500){
+            if(nuggetNeed >= 160){
                 pullID('ticker').innerText = "EMERGENCY"
             } else {
                 nuggetNeed += 1;
                 pullID('ticker').innerText = "Nuggets to safe: " + nuggetNeed;
             }
         } else {
-            if (nuggetNeed >= 500) {
+            if (nuggetNeed >= 160) {
                 pullID('ticker').innerText = "EMERGENCY"
             } else {
                 nuggetNeed += 0.5;

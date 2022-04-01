@@ -105,12 +105,73 @@ function engine(type){ // Core sheet generation and assignment engine
     if(type == '1'){
         // new
 
-    } else if(type == '2'){
-        // load
+    } else if(type == 'load'){
+        load();
     }
+    $hr(con)
+    $b(con,'Save Data',function(){save()});
 }
 
 
+
+// Save and load functionality
+//////////////////////////////
+//////////////////////////////
+
+function save(){
+    var off = [];
+    var def = [];
+    var sup = [];
+    localStorage.setItem('name',pullID('charName').value);
+    localStorage.setItem('hp',pullID('charHP').value);
+    localStorage.setItem('armor',pullID('charArmor').value);
+    for (let i = 0; i < 11; i++) {
+        let state = pullID('selerOf' + [i]).value;
+        off.push(state);
+    }
+    for (let i = 0; i < 10; i++) {
+        let state = pullID('selerDe' + [i]).value;
+        def.push(state);
+    }
+    for (let i = 0; i < 12; i++) {
+        let state = pullID('selerSu' + [i]).value;
+        sup.push(state);
+    }
+    localStorage.setItem('offense', JSON.stringify(off));
+    localStorage.setItem('defense', JSON.stringify(def));
+    localStorage.setItem('support', JSON.stringify(sup));
+}
+
+function load(){
+    let off = JSON.parse(localStorage.getItem('offense'));
+    let def = JSON.parse(localStorage.getItem('defense'));
+    let sup = JSON.parse(localStorage.getItem('support'));
+    console.log(off.length);
+    for(let i = 0; i < off.length; i++){
+        pullID('selerOf' + [i]).value = off[i];
+    }
+    for (let i = 0; i < def.length; i++) {
+        pullID('selerDe' + [i]).value = def[i];
+    }
+    for (let i = 0; i < sup.length; i++) {
+        pullID('selerSu' + [i]).value = sup[i];
+    }
+    pullID('charName').value = lo('name');
+    updateData();
+    updateAssist('off');
+    updateAssist('def');
+    updateAssist('sup');
+}
+
+// END Save / Load functions
+/////////////////////////////
+////////////////////////////
+
+
+/////////////////////////////////////////========================================/////////////////////////////
+
+//Update functions////////////
+/////////////////////////////
 
 var num = 0;
 function update(type, id){ // Main sheet update function
@@ -150,4 +211,17 @@ let updateAssist = (type) => {
     let pBase = eval(type+'PointsBase');
     typePoints = pBase - num;
     poinTexBase.innerText = 'Points: ' + typePoints;
+}
+
+//////end of update functions///////////////
+////////////////////////////////////////////
+
+
+///////////////////////////////======================================///////////////////
+
+function sa(a, b){ // Saves an item to storage
+    localStorage.setItem(a, b);
+}
+function lo(a){ // Loads an item from storage
+    return localStorage.getItem(a);
 }

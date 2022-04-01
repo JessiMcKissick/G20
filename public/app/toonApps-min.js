@@ -1,1 +1,1 @@
-let listApp=["Alaqua","Aiya"];var tick=0;function toonApps(){let p=page();$h(2,p,"Character Apps","","appsTitle"),$hr(p,"divider","");for(let t=0;t<listApp.length;t++)$b(p,listApp[t],function(){router(listApp[t]+"()")},"",""),console.log(listApp[t]+"()")}
+let listApp=["Alaqua","Aiya"];var tick=0;function applets(){let p=page();$h(2,p,"Character Apps","","appsTitle"),$hr(p,"divider","");for(let t=0;t<listApp.length;t++)$b(p,listApp[t],function(){router(listApp[t]+"()")},"",""),console.log(listApp[t]+"()")}
