@@ -1,32 +1,20 @@
 header();
-let routeTick = window.setInterval(routeCheck, 1000);
-var currentPage;
+// let routeTick = window.setInterval(routeCheck, 1000);
+var currentPage = '#home()';
 //
 function router(inp){
-    if(isHome == true){
-        home();
-        winLoc('#home()');
-        currentPage = '#home()';
-    } else if(isNew == true){
-        clear();
-        engine();
-        winLoc('new');
-        currentPage = 'new'
-    } else if(isLoad == true){
-
-        winLoc('load');
-    
-    } else if(isApplet == true) {
-        clear();
-        toonApps();
-        winLoc('applets');
-        currentPage = 'applets';
-    } else {
-    }
     if(inp != undefined){
         clear();
         eval(inp);
         winLoc(inp);
+        if(currentPage.includes('#')){
+            currentPage = inp;
+            console.log('case a')
+
+        } else {
+            currentPage = '#'+inp;
+            console.log('case b')
+        }
     } else {
 
     }
@@ -36,13 +24,20 @@ function router(inp){
 // if different route(target page)
 
 function routeCheck(){
-
+    // If win loc != current page, router current page
+    if(window.location.hash == currentPage){
+        console.log('ok: ' + window.location.hash);
+    } else {
+        router(currentPage);
+    }
 }
 
 footer();
 
 function clear(){
-    pullID('content').remove()
+    if(pullID('content') != undefined){
+        pullID('content').remove()  
+    }
 }
 
 function page() {
