@@ -6,7 +6,9 @@ var isBurn = false;
 
 function Alaqua() {
     let data = localStorage.getItem('aquaState')
-    aquaAether = parseInt(data).toFixed(1);
+    if(data != undefined){
+        aquaAether = parseInt(data).toFixed(1);
+    }
     let con = page();
     $h(2, con, 'Alaquas Aether burn-down', '', '');
     $hr(con);

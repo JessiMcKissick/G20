@@ -4,7 +4,11 @@ var nuggetNeed = 0;
 var glassState = 0;
 
 function Aiya() {
-    nuggetNeed = localStorage.getItem('aiyaNug');
+    let data = localStorage.getItem('aiyaNug')
+    if(data != undefined){
+        nuggetNeed = parseInt(data).toFixed(1);
+
+    }
     let con = page();
     $h(2, con, 'Aiya nugget generation needs', '', '');
     $hr(con);
