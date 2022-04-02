@@ -6,7 +6,7 @@ var isBurn = false;
 
 function Alaqua() {
     let data = localStorage.getItem('aquaState')
-    if(data != undefined){
+    if(data != undefined && data != 'NaN'){
         aquaAether = parseInt(data).toFixed(1);
     }
     let con = page();
