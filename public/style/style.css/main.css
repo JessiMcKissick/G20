@@ -15,3 +15,53 @@ body {
   display: block;
   float: right;
 }
+
+.featDiv {
+  margin-top: 40px;
+  width: 15vw;
+  padding: 10px;
+  text-align: center;
+  display: block;
+  float: left;
+  background-color: gray;
+}
+.featDiv input {
+  width: 13vw;
+}
+
+.fInfo {
+  height: 400px !important;
+  width: 14vw textarea;
+}
+
+.fName {
+  width: 100%;
+  font-size: 0.7em;
+}
+
+.featDivAlt {
+  margin-top: 40px;
+  width: 15vw;
+  padding: 10px;
+  text-align: center;
+  display: block;
+  float: left;
+  background-color: green;
+}
+.featDivAlt input {
+  width: 13vw;
+}
+
+.featDivStory {
+  background-color: red;
+  text-align: center;
+}
+
+.featDivStoryAlt {
+  background-color: orange;
+  text-align: center;
+}
+
+#content {
+  text-align: left;
+}

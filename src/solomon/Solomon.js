@@ -143,7 +143,7 @@ let $form = (t,cn,id,action,method,name) => {
 }
 
 let $input = (t,c,cn,id,type,name,label,isEnabled) => {
-    $p(t,label,cn,id + 'label');
+    $p(t,label,cn + 'label',id + 'label');
     $g(t,"input",c,id,cn,"",type,name,isEnabled);
 }
 
@@ -151,6 +151,10 @@ let $b = (t,c,oc,cn,id) => {
     $g(t, "button", c, id, cn, oc);
 };
 
+let $area = (t, c, cn, id, label) => {
+    $p(t, label, cn + 'label', id + 'label');
+    $g(t, "textarea", c, id, cn, "");
+}
 
 
 //Generic bulk generators
