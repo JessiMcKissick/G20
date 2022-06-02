@@ -1,0 +1,1 @@
+let version="1.0.1b (Unskinned)";function header(){$header();let e=pullID("header"),o=pullID("logoHold");pullID("navHold"),pullID("headNav");$h(1,o,"G20 Character Sheet (Beta) "+version,"","headTitle"),$b(e,"Go back",function(){router(prevPage)},"",""),$b(e,"Go home",function(){router("home()")},"","")}

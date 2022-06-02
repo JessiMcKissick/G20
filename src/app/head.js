@@ -1,3 +1,4 @@
+let version = '1.0.1b (Unskinned)';
 
 function header(){
     $header();
@@ -8,6 +9,9 @@ function header(){
     let navi = pullID('headNav');
     ////////////////////////////////
     
-    $h(1,logo,'G20 Character Sheet','','headTitle');
+    $h(1,logo,'G20 Character Sheet (Beta) ' + version,'','headTitle');
+    $b(hdr, 'Go back', function () { router(prevPage) }, '', '')
+    $b(hdr, 'Go home', function () { router('home()') }, '', '')
 
-}
+
+} 
