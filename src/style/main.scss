@@ -17,6 +17,7 @@ button{
 }
 
 
+
 #sheet{
     // background-color: green;
     // display: flex;
@@ -62,6 +63,10 @@ button{
         color: black; 
         font-size: 1em;
         font-weight: bold;
+        border-radius: 6px;
+        border:none; 
+        padding-right: 10px;
+        margin-left: 10px;
     }
 }
 

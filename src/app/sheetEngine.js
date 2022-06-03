@@ -310,7 +310,6 @@ function load() { // Loads data from browser storage
     let off = JSON.parse(localStorage.getItem('offense'));
     let def = JSON.parse(localStorage.getItem('defense'));
     let sup = JSON.parse(localStorage.getItem('support'));
-
     let featNames = JSON.parse(localStorage.getItem('featNames'));
     let featInf = JSON.parse(localStorage.getItem('featInfo'));
     let featNameStory = JSON.parse(localStorage.getItem('featNameStory'));
@@ -325,9 +324,8 @@ function load() { // Loads data from browser storage
     defNeg = defenseNegative;
     offNeg = offenseNegative;
     supNeg = supportNegative;
-    difCount = (defNeg + supNeg + offNeg) * 4
+    difCount = (defNeg + supNeg + offNeg) * 2
     auxDif = Math.abs(difCount);
-    console.log(supNeg+" wowaonw")
     if (off != undefined) {
         for (let i = 0; i < off.length; i++) {
             pullID('selerOf' + [i]).value = off[i];
