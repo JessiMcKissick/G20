@@ -40,8 +40,15 @@ var offSkillID = []
 var defSkillID = []
 var supSkillID = []
 
+
+// Variables for the negative number system
+var defNeg = 0;
+var offNeg = 0;
+var supNeg = 0;
+var auxDif = 0;
+///////////////////////////////////////////
+
 function engine(type) { // Core sheet generation and assignment engine
-    // TODO: Add system for using aux points after regular is exhausted.
     generateUI(); // Generate the basic UI
 
     /////Variables for ui/////
@@ -79,6 +86,81 @@ function generateUI() {
     $d(grid, 'subGrid', 'offenseGrid'); let ofGrid = pullID('offenseGrid');
     $d(grid, 'subGrid', 'defenseGrid'); let deGrid = pullID('defenseGrid');
     $d(grid, 'subGrid', 'supportGrid'); let suGrid = pullID('supportGrid');
+    // Todo: put a selecter before each box with 0, -1, and -2. 
+
+
+    $sel(deGrid, '', 'defenseNegCounter');
+    $sel(ofGrid, '', 'offenseNegCounter');
+    $sel(suGrid, '', 'supportNegCounter');
+    for(let i = 0; i < 3; i++) {
+        $opt(pullID('defenseNegCounter'), -Math.abs(i), '', '');
+
+        // pullID('selerOf' + i).onchange = function () {
+        //     update('off', ('selerOf' + i));
+        // };
+        
+    }
+    pullID('defenseNegCounter').onchange = function () {
+        let difCount = (parseInt(pullID('defenseNegCounter').value) + parseInt(pullID('offenseNegCounter').value) + parseInt(pullID('supportNegCounter').value)) * 2;
+        auxDif = Math.abs(difCount);
+        defNeg = Math.abs(pullID('defenseNegCounter').value);
+        // Go through each element in the defense section adding or subtracting according to the state.
+        for(i=0; i<=9; i++){
+            console.log(defNeg);
+            if(pullID('selerDe' + i).value > -1){
+                pullID('selerDe' + i).value -= defNeg;
+            } else {
+                pullID('selerDe' + i).value = 0 - defNeg;
+            }
+            // id.value -= defNeg;
+        }
+        console.log(defNeg);
+        update('def');
+    }
+    for (let i = 0; i < 3; i++) {
+        $opt(pullID('offenseNegCounter'), -Math.abs(i), '', '');
+
+    }
+    pullID('offenseNegCounter').onchange = function () {
+        let difCount = (parseInt(pullID('defenseNegCounter').value) + parseInt(pullID('offenseNegCounter').value) + parseInt(pullID('supportNegCounter').value)) * 2;
+        auxDif = Math.abs(difCount);
+        offNeg = Math.abs(pullID('offenseNegCounter').value);
+        // Go through each element in the defense section adding or subtracting according to the state.
+        for (i = 0; i <= 10; i++) {
+            console.log(offNeg);
+            if (pullID('selerOf' + i).value > -1) {
+                pullID('selerOf' + i).value -= offNeg;
+            } else {
+                pullID('selerOf' + i).value = 0 - offNeg;
+            }
+            // id.value -= defNeg;
+        }
+        console.log(offNeg);
+        update('off');
+    }
+    
+    for (let i = 0; i < 3; i++) {
+        $opt(pullID('supportNegCounter'), -Math.abs(i), '', '');
+
+    }
+
+    pullID('supportNegCounter').onchange = function () {
+        let difCount = (parseInt(pullID('defenseNegCounter').value) + parseInt(pullID('offenseNegCounter').value) + parseInt(pullID('supportNegCounter').value)) * 2;
+        auxDif = Math.abs(difCount);
+        supNeg = Math.abs(pullID('supportNegCounter').value);
+        // Go through each element in the defense section adding or subtracting according to the state.
+        for (i = 0; i <= 11; i++) {
+            console.log(supNeg);
+            if (pullID('selerSu' + i).value > -1) {
+                pullID('selerSu' + i).value -= supNeg;
+            } else {
+                pullID('selerSu' + i).value = 0 - supNeg;
+            }
+            // id.value -= defNeg;
+        }
+        console.log(defNeg);
+        update('sup');
+    }
     $h(3, deGrid, 'Defense Points: ' + defPoints, 'pointCount', 'defPointCounter');
     $h(3, ofGrid, 'Offense Points: ' + offPoints, 'pointCount', 'offPointCounter');
     $h(3, suGrid, 'Support Points: ' + supPoints, 'pointCount', 'supPointCounter');
@@ -98,23 +180,26 @@ function proceduralUI(a, b, c, d) {
         $p(a, itemList[i]);
         $sel(a, 'seler', 'selerOf' + i); let ofSel = pullID('selerOf' + i);
         offSkillID.push(('selerOf' + i));
-        for (let e = 0; e <= offPointMax; e++) {
+        for (let e = -2; e <= offPointMax; e++) {
             $opt(ofSel, e, '', '');
         };
         pullID('selerOf' + i).onchange = function () {
             update('off', ('selerOf' + i));
         };
+        pullID('selerOf' + i).value = 0;
     };
     for (let i = 0; i < 10; i++) {
         $p(b, itemList[(i + 11)]);
         $sel(b, 'seler', 'selerDe' + i); let deSel = pullID('selerDe' + i);
         defSkillID.push('selerDe' + i);
-        for (let e = 0; e <= defPointMax; e++) {
+        for (let e = -2; e <= defPointMax; e++) {
             $opt(deSel, e, '', '');
         }
         pullID('selerDe' + i).onchange = function () {
             update('def', ('selerDe' + i));
         };
+        pullID('selerDe' + i).value = 0;
+
     };
     for (let i = 0; i < 12; i++) {
         $p(c, itemList[(i + 21)]);
@@ -123,7 +208,9 @@ function proceduralUI(a, b, c, d) {
         pullID('selerSu' + i).onchange = function () {
             update('sup', ('selerSu' + i));
         };
-        for (let e = 0; e <= supPointMax; e++) {
+        pullID('selerSu' + i).value = 0;
+
+        for (let e = -2; e <= supPointMax; e++) {
             $opt(suSel, e, '', '');
         }
     };
@@ -153,6 +240,9 @@ function proceduralUI(a, b, c, d) {
         // $input(divAlt, '', 'fInfo', 'fInfSt' + i, 'textArea', '', 'Story Feat Info');
         $area(divAlt, '', 'fInfo', 'fInfSt' + i, 'Story Feat Info');
 
+    }
+    for (let i = 0; i < 11; i++) {
+        pullID('selerSu' + i).value = 0;    
     }
 }
 
@@ -203,7 +293,10 @@ function save() { // Simply saves data to browser storage
     localStorage.setItem('featInfo', JSON.stringify(featInf));
     localStorage.setItem('featNameStory', JSON.stringify(featNameStory));
     localStorage.setItem('featInfoStory', JSON.stringify(featInfStory));
-
+    localStorage.setItem('defenseNegative', JSON.stringify(defNeg));
+    localStorage.setItem('offenseNegative', JSON.stringify(offNeg));
+    localStorage.setItem('supportNegative', JSON.stringify(supNeg));
+    localStorage.setItem('auxData', JSON.stringify(auxPoints));
 
 }
 
@@ -217,6 +310,19 @@ function load() { // Loads data from browser storage
     let featInf = JSON.parse(localStorage.getItem('featInfo'));
     let featNameStory = JSON.parse(localStorage.getItem('featNameStory'));
     let featInfStory = JSON.parse(localStorage.getItem('featInfoStory'));
+    let defenseNegative = JSON.parse(localStorage.getItem('defenseNegative'));
+    let offenseNegative = JSON.parse(localStorage.getItem('offenseNegative'));
+    let supportNegative = JSON.parse(localStorage.getItem('supportNegative'));
+    let auxData = JSON.parse(localStorage.getItem('auxData'));
+    pullID('offenseNegCounter').value = -Math.abs(offenseNegative);
+    pullID('defenseNegCounter').value = -Math.abs(defenseNegative);
+    pullID('supportNegCounter').value = -Math.abs(supportNegative);
+    defNeg = defenseNegative;
+    offNeg = offenseNegative;
+    supNeg = supportNegative;
+    difCount = (defNeg + supNeg + offNeg) * 4
+    auxDif = Math.abs(difCount);
+    console.log(supNeg+" wowaonw")
     if (off != undefined) {
         for (let i = 0; i < off.length; i++) {
             pullID('selerOf' + [i]).value = off[i];
@@ -244,10 +350,10 @@ function load() { // Loads data from browser storage
 
         pullID('charName').value = lo('name');
     }
-    updateData();
-    updateAssist('off');
-    updateAssist('def');
-    updateAssist('sup');
+    // updateData();
+    update('off');
+    update('def');
+    update('sup');
 }
 // END Save / Load functions
 /////////////////////////////
@@ -265,7 +371,7 @@ function load() { // Loads data from browser storage
 //Update functions////////////
 /////////////////////////////
 var num = 0;
-function update(type, id) { // Main sheet update function
+function update(type) { // Main sheet update function
     let defText = pullID('defPointCounter');
     let supText = pullID('supPointCounter');
     if (type == 'off' && (offPoints + auxPoints) > 0) {
@@ -291,13 +397,55 @@ let updateAssist = (type) => { // This does the work of checking each box's valu
     var poinTexBase = eval(type + 'PointCounter')
     for (let i = 0; i < data.length; i++) {
         let inp = parseInt(pullID(data[i]).value);
-        if (inp < 9) { // 1-8 sets the number to the input.
-            num = (num + inp);
-        } else if (inp == 9) { // 9 sets the number to input +1
-            num = (num + inp) + 1;
-        } else if (inp == 10) { // 10 sets the number to input +2
-            num = (num + inp) + 4;
+        if(type == 'off'){
+            console.log("Offense negative state: " + offNeg);
+            if (inp == -1 && offNeg == -1) {
+                num = num + 0;
+            } else if (inp == -1 && offNeg == -2){
+                num = num + 1;
+            } else if (inp == -2){
+                num = num + 0;
+            } else if (inp < 9 && inp > -Math.abs(offNeg)) { // 1-8 sets the number to the input plus the modifier.
+                console.log('works fine')
+                num = (num + inp) + offNeg;
+            } else if (inp == 9) { // 9 sets the number to input +1
+                num = (num + inp) + 1 + offNeg;
+            } else if (inp == 10) { // 10 sets the number to input +2
+                num = (num + inp) + 4 + offNeg;
+            }
         }
+        if (type == 'def') {
+            if (inp == -1 && defNeg == -1) {
+                num = num + 0;
+            } else if (inp == -1 && defNeg == -2) {
+                num = num + 1;
+            } else if (inp == -2) {
+                num = num + 0;
+            } else if (inp < 9 && inp > -Math.abs(defNeg)) { // 1-8 sets the number to the input.
+                num = (num + inp) + defNeg;
+
+            } else if (inp == 9) { // 9 sets the number to input +1
+                num = (num + inp) + 1 + defNeg;
+            } else if (inp == 10) { // 10 sets the number to input +2
+                num = (num + inp) + 4 + defNeg;
+            }
+        }
+        if (type == 'sup') {
+            if (inp == -1 && supNeg == -1) {
+                num = num + 0;
+            } else if (inp == -1 && supNeg == -2) {
+                num = num + 1;
+            } else if (inp == -2) {
+                num = num + 0;
+            } else if (inp < 9 && inp > -Math.abs(supNeg)) { // 1-8 sets the number to the input.
+                num = (num + inp) + supNeg;
+            } else if (inp == 9) { // 9 sets the number to input +1
+                num = (num + inp) + 1 + supNeg;
+            } else if (inp == 10) { // 10 sets the number to input +2
+                num = (num + inp) + 4 + supNeg;
+            }
+        }
+        
     }
     let pBase = eval(type + 'PointsBase'); // This grabs the base amount of points for a category, so 15 atm
     let pnum = pBase - num;
@@ -310,7 +458,7 @@ let updateAssist = (type) => { // This does the work of checking each box's valu
             auxsup = Math.abs(pnum)
         }
         let allAux = (auxoff + auxdef + auxsup);
-        let infNum = auxCount - allAux;
+        let infNum = auxCount - (allAux + -Math.abs(auxDif));
         auxPoints = infNum;
         typePoints = 0; // This sets the available points in a category to the base - the amount used
         // poinTexBase.innerText = 'Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
@@ -339,17 +487,35 @@ let updateAssist = (type) => { // This does the work of checking each box's valu
         typePoints = pBase - num; // This sets the available points in a category to the base - the amount used
         // poinTexBase.innerText = 'Points: ' + typePoints; // This sets the text for the category
         if (type == 'off') {
-            poinTexBase.innerText = 'Offense Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
+            if(typePoints > 15){
+                poinTexBase.innerText = 'Offense Points: ' + 15; // This sets the text for the category        // Check how many points below 0 are being used
+
+            } else {
+                poinTexBase.innerText = 'Offense Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
+
+            }
 
         } else if (type == 'def') {
-            poinTexBase.innerText = 'Defense Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
+            if (typePoints > 15) {
+                poinTexBase.innerText = 'Defense Points: ' + 15; // This sets the text for the category        // Check how many points below 0 are being used
+
+            } else {
+                poinTexBase.innerText = 'Defense Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
+
+            }
 
         } else if (type == 'sup') {
-            poinTexBase.innerText = 'Support Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
+            if (typePoints > 15) {
+                poinTexBase.innerText = 'Support Points: ' + 15; // This sets the text for the category        // Check how many points below 0 are being used
+
+            } else {
+                poinTexBase.innerText = 'Support Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
+
+            }
 
         }
         let allAux = (auxoff + auxdef + auxsup);
-        let infNum = auxCount - allAux;
+        let infNum = auxCount - (allAux + -Math.abs(auxDif) );
         auxPoints = infNum;
         pullID('auxCounter').innerText = 'Auxilary points: ' + auxPoints;
 
