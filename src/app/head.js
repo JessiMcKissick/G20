@@ -9,8 +9,8 @@ function header(){
     ////////////////////////////////
     
     $h(1,logo,'G20 Character Sheet (Dev)','','headTitle');
-    $b(hdr, 'Go back', function () { router(prevPage) }, '', '')
-    $b(hdr, 'Go home', function () { router('home()') }, '', '')
+    // $b(hdr, 'Go back', function () { router(prevPage) }, '', '')
+    // $b(hdr, 'Go home', function () { router('home()') }, '', '')
 
 
 } 

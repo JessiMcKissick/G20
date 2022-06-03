@@ -73,14 +73,17 @@ function engine(type) { // Core sheet generation and assignment engine
 
 function generateUI() {
     $d(body, '', 'content');
-    $h(3, pullID('header'), 'Auxilary points: ' + auxCount, '', 'auxCounter');
     let con = pullID('content');
     $form(con, '', 'sheet')
     let form = pullID('sheet');
-    $input(form, 'Name', 'sheetData', 'charName', 'text', 'sheetName', 'Character Name', '');
-    $hr(form, '', '');
-    $input(form, 'HP', 'sheetData', 'charHP', 'text', 'sheetHP', 'HP', 'true');
-    $input(form, 'Armor', 'sheetData', 'charArmor', 'text', 'sheetArm', 'Armor', 'true');
+    $h(3, form, 'Auxilary points: ' + auxCount, '', 'auxCounter');
+    $d(form, '', 'charnameBox'); let charBox = pullID('charnameBox');
+    $input(charBox, 'Name', 'sheetData', 'charName', 'text', 'sheetName', 'Character Name', '');
+    $d(form, '', 'hpBox'); let hpBox = pullID('hpBox');
+    $input(hpBox, 'HP', 'sheetData', 'charHP', 'text', 'sheetHP', 'HP', 'true');
+    $d(form,'','armorBox'); let armorBox = pullID('armorBox');
+    $input(armorBox, 'Armor', 'sheetData', 'charArmor', 'text', 'sheetArm', 'Armor', 'true');
+
     $hr(form, '', '');
     $d(form, 'contentGrid', 'stats'); let grid = pullID('stats');
     $d(grid, 'subGrid', 'offenseGrid'); let ofGrid = pullID('offenseGrid');
@@ -88,9 +91,11 @@ function generateUI() {
     $d(grid, 'subGrid', 'supportGrid'); let suGrid = pullID('supportGrid');
     // Todo: put a selecter before each box with 0, -1, and -2. 
 
-
+    $p(deGrid,'Negative modifier');
     $sel(deGrid, '', 'defenseNegCounter');
+    $p(ofGrid, 'Negative modifier');
     $sel(ofGrid, '', 'offenseNegCounter');
+    $p(suGrid, 'Negative modifier');
     $sel(suGrid, '', 'supportNegCounter');
     for(let i = 0; i < 3; i++) {
         $opt(pullID('defenseNegCounter'), -Math.abs(i), '', '');
@@ -241,7 +246,7 @@ function proceduralUI(a, b, c, d) {
         $area(divAlt, '', 'fInfo', 'fInfSt' + i, 'Story Feat Info');
 
     }
-    for (let i = 0; i < 11; i++) {
+    for (let i = 0; i < 12; i++) {
         pullID('selerSu' + i).value = 0;    
     }
 }

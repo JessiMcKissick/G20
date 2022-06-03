@@ -1,5 +1,47 @@
+@font-face {
+    font-family: Canterbury;
+    src: url('/media/Canterbury.ttf');
+}
 body{
-    background-color: white;
+    background-image: url("/media/bg_image.jpg");
+    font-family: Canterbury;
+}
+
+
+button{
+    background-color: #00000064;
+    margin-right: 2vw;
+    border: none;
+    border-radius: 6px;
+    padding: 1em;
+}
+
+
+#sheet{
+    // background-color: green;
+    // display: flex;
+    // float: left;
+    #auxCounter{
+        width: 20vw;
+        float: left;
+        font-size: 1.5em;
+
+    }
+    #charnameBox{
+        width: 20vw;
+        float: left;
+    }
+    #hpBox{
+        width: 20vw;
+        float: left;
+    }
+    #armorBox{
+        width: 20vw;
+        float: left;
+    }
+    hr{
+        width: 100vw !important;
+    }
 }
 
 .subGrid{
@@ -7,6 +49,20 @@ body{
     margin: 0px;
     padding: 0px;
     float: left;
+    p{
+        padding-bottom: 0px !important;
+        margin-bottom: 0px !important;
+        margin-top: 5px !important;
+        font-size: 1.2em;
+    }
+    .seler{
+        padding-bottom: 0px !important;
+        margin-bottom: 0px !important;
+        background-color: rgba(0, 0, 0, 0.208);
+        color: black; 
+        font-size: 1em;
+        font-weight: bold;
+    }
 }
 
 #footer{
