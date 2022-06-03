@@ -389,7 +389,12 @@ function update(type) { // Main sheet update function
 
 function updateData() { // Updates all state-specific text
     val('charHP', Math.floor((val('selerDe0') / 2) + 5));
-    val('charArmor', val('selerDe2'));
+    if(pullID('selerDe2').value < 0){
+        val('charArmor', 0);
+    } else {
+        val('charArmor', val('selerDe2'));
+
+    }
 };
 
 let updateAssist = (type) => { // This does the work of checking each box's value
