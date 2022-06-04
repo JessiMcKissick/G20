@@ -170,11 +170,11 @@ function generateUI() {
     $h(3, ofGrid, 'Offense Points: ' + offPoints, 'pointCount', 'offPointCounter');
     $h(3, suGrid, 'Support Points: ' + supPoints, 'pointCount', 'supPointCounter');
     $hr(form)
-    for (let i; i < 5; i++) {
-        $input(form, 'fName', '', 'fName' + i, 'text', 'fname1', 'Feat name');
-        $input(form, 'fInf', '', 'fInf' + i, 'text', 'fname1', 'Feat name');
+    // for (let i; i < 5; i++) {
+    //     $input(form, 'fName', '', 'fName' + i, 'text', 'fname1', 'Feat name');
+    //     $input(form, 'fInf', '', 'fInf' + i, 'text', 'fname1', 'Feat name');
 
-    }
+    // } 
 }
 
 
@@ -229,32 +229,32 @@ function proceduralUI(a, b, c, d) {
         }
     };
     // $hr(d)
-    for (let i = 0; i < 5; i++) {
-        if(i%2 == 0){
-            $d(d, 'featDiv', 'featNo' + i);
-        } else {
-            $d(d, 'featDivAlt', 'featNo' + i);
+    // for (let i = 0; i < 5; i++) {
+    //     if(i%2 == 0){
+    //         $d(d, 'featDiv', 'featNo' + i);
+    //     } else {
+    //         $d(d, 'featDivAlt', 'featNo' + i);
 
-        }
-        let div = pullID('featNo' + i);
-        $input(div, '', 'fName', 'fName' + i, 'text', '', 'Feat Name');
-        $area(div,'','fInfo','fInf' + i,'Feat Info');
-        // $input(div, '', 'fInfo', 'fInf' + i, 'textArea','', 'Feat Info');
-    }
-    // $hr(d);
-    for (let i = 0; i < 5; i++) {
-        let divAlta = eval('featNo' + i);
-        if (i % 2 == 0) {
-            $d(divAlta, 'featDivStory', 'featStNo' + i);
-        } else {
-            $d(divAlta, 'featDivStoryAlt', 'featStNo' + i);
-        }
-        let divAlt = pullID('featStNo' + i);
-        $input(divAlt, '','fName', 'fNameSt' + i, 'text', '', 'Story Feat Name');
-        // $input(divAlt, '', 'fInfo', 'fInfSt' + i, 'textArea', '', 'Story Feat Info');
-        $area(divAlt, '', 'fInfo', 'fInfSt' + i, 'Story Feat Info');
+    //     }
+    //     let div = pullID('featNo' + i);
+    //     $input(div, '', 'fName', 'fName' + i, 'text', '', 'Feat Name');
+    //     $area(div,'','fInfo','fInf' + i,'Feat Info');
+    //     // $input(div, '', 'fInfo', 'fInf' + i, 'textArea','', 'Feat Info');
+    // }
+    // // $hr(d);
+    // for (let i = 0; i < 5; i++) {
+    //     let divAlta = eval('featNo' + i);
+    //     if (i % 2 == 0) {
+    //         $d(divAlta, 'featDivStory', 'featStNo' + i);
+    //     } else {
+    //         $d(divAlta, 'featDivStoryAlt', 'featStNo' + i);
+    //     }
+    //     let divAlt = pullID('featStNo' + i);
+    //     $input(divAlt, '','fName', 'fNameSt' + i, 'text', '', 'Story Feat Name');
+    //     // $input(divAlt, '', 'fInfo', 'fInfSt' + i, 'textArea', '', 'Story Feat Info');
+    //     $area(divAlt, '', 'fInfo', 'fInfSt' + i, 'Story Feat Info');
 
-    }
+    // }
     for (let i = 0; i < 12; i++) {
         pullID('selerSu' + i).value = 0;    
     }
