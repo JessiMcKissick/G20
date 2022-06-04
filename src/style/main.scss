@@ -16,7 +16,9 @@ button{
     padding: 1em;
 }
 
-
+input{
+    border-radius: 10px;
+}
 
 #sheet{
     // background-color: green;
@@ -42,7 +44,38 @@ button{
     }
     hr{
         width: 100vw !important;
+        margin-top: 1em;
+        color: #00000000;
+        visibility: hidden;
     }
+}
+
+#scienceType{
+    width: 50%; 
+    // margin-left: 0.7em;
+}
+
+#ScienceSuDiv{
+    display: inline;
+    #selerSu9{
+        float: left;
+    }
+    #scienceLabel{
+        width: 30vw !important;
+        font-size: 1.5em;
+
+    }
+    #scienceTypelabel{
+        padding: 0px;
+        margin: 0px !important;
+    }
+    #scienceType{
+        // float: right;   
+        margin-left: 0.2em;
+        border-radius: 10px;
+    }
+
+
 }
 
 .subGrid{

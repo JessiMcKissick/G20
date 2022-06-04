@@ -15,6 +15,10 @@ button {
   padding: 1em;
 }
 
+input {
+  border-radius: 10px;
+}
+
 #sheet #auxCounter {
   width: 20vw;
   float: left;
@@ -34,6 +38,32 @@ button {
 }
 #sheet hr {
   width: 100vw !important;
+  margin-top: 1em;
+  color: #00000000;
+  visibility: hidden;
+}
+
+#scienceType {
+  width: 50%;
+}
+
+#ScienceSuDiv {
+  display: inline;
+}
+#ScienceSuDiv #selerSu9 {
+  float: left;
+}
+#ScienceSuDiv #scienceLabel {
+  width: 30vw !important;
+  font-size: 1.5em;
+}
+#ScienceSuDiv #scienceTypelabel {
+  padding: 0px;
+  margin: 0px !important;
+}
+#ScienceSuDiv #scienceType {
+  margin-left: 0.2em;
+  border-radius: 10px;
 }
 
 .subGrid {

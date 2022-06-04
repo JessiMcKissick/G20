@@ -64,7 +64,7 @@ function engine(type) { // Core sheet generation and assignment engine
 
     updateData();
 
-    $hr(con)
+    // $hr(con)
     $b(con, 'Save Data', function () { save() });
 }
 
@@ -182,8 +182,10 @@ function generateUI() {
 
 function proceduralUI(a, b, c, d) {
     for (let i = 0; i < 11; i++) {
-        $p(a, itemList[i]);
-        $sel(a, 'seler', 'selerOf' + i); let ofSel = pullID('selerOf' + i);
+        console.log('A tick')
+        $d(a,'',itemList[i]+"Div"); let div = pullID(itemList[i]+"Div");
+        $p(div, itemList[i], '', itemList[(i)] + "Label");
+        $sel(div, 'seler', 'selerOf' + i); let ofSel = pullID('selerOf' + i);
         offSkillID.push(('selerOf' + i));
         for (let e = -2; e <= offPointMax; e++) {
             $opt(ofSel, e, '', '');
@@ -194,8 +196,10 @@ function proceduralUI(a, b, c, d) {
         pullID('selerOf' + i).value = 0;
     };
     for (let i = 0; i < 10; i++) {
-        $p(b, itemList[(i + 11)]);
-        $sel(b, 'seler', 'selerDe' + i); let deSel = pullID('selerDe' + i);
+        console.log('B tick')
+        $d(b, '', itemList[(i + 11)] + "DefDiv"); let div = pullID(itemList[(i + 11)] + "DefDiv");
+        $p(div, itemList[(i + 11)], '', itemList[(i + 11)] + 'Label');
+        $sel(div, 'seler', 'selerDe' + i); let deSel = pullID('selerDe' + i);
         defSkillID.push('selerDe' + i);
         for (let e = -2; e <= defPointMax; e++) {
             $opt(deSel, e, '', '');
@@ -207,8 +211,13 @@ function proceduralUI(a, b, c, d) {
 
     };
     for (let i = 0; i < 12; i++) {
-        $p(c, itemList[(i + 21)]);
-        $sel(c, 'seler', 'selerSu' + i); let suSel = pullID('selerSu' + i);
+        $d(c, '', itemList[(i + 21)] + "SuDiv"); let div = pullID(itemList[(i + 21)] + "SuDiv");
+        $p(div, itemList[(i + 21)],'',itemList[(i+21)] + "Label");
+        $sel(div, 'seler', 'selerSu' + i); let suSel = pullID('selerSu' + i);
+        if (itemList[(i + 21)] == "Science") {
+            $input(div, '', '', 'scienceType');
+            pullID('ScienceLabel').innerText = "Science (Specify)";
+        }
         supSkillID.push('selerSu' + i)
         pullID('selerSu' + i).onchange = function () {
             update('sup', ('selerSu' + i));
@@ -219,7 +228,7 @@ function proceduralUI(a, b, c, d) {
             $opt(suSel, e, '', '');
         }
     };
-    $hr(d)
+    // $hr(d)
     for (let i = 0; i < 5; i++) {
         if(i%2 == 0){
             $d(d, 'featDiv', 'featNo' + i);
@@ -232,7 +241,7 @@ function proceduralUI(a, b, c, d) {
         $area(div,'','fInfo','fInf' + i,'Feat Info');
         // $input(div, '', 'fInfo', 'fInf' + i, 'textArea','', 'Feat Info');
     }
-    $hr(d);
+    // $hr(d);
     for (let i = 0; i < 5; i++) {
         let divAlta = eval('featNo' + i);
         if (i % 2 == 0) {
@@ -263,6 +272,7 @@ function save() { // Simply saves data to browser storage
     let featInf = [];
     let featNameStory = [];
     let featInfStory = [];
+    let scienceType = pullID('scienceType').value;
     localStorage.setItem('name', pullID('charName').value);
     localStorage.setItem('hp', pullID('charHP').value);
     localStorage.setItem('armor', pullID('charArmor').value);
@@ -302,6 +312,7 @@ function save() { // Simply saves data to browser storage
     localStorage.setItem('offenseNegative', JSON.stringify(offNeg));
     localStorage.setItem('supportNegative', JSON.stringify(supNeg));
     localStorage.setItem('auxData', JSON.stringify(auxPoints));
+    localStorage.setItem('scienceType', JSON.stringify(scienceType));
 
 }
 
@@ -318,6 +329,9 @@ function load() { // Loads data from browser storage
     let offenseNegative = JSON.parse(localStorage.getItem('offenseNegative'));
     let supportNegative = JSON.parse(localStorage.getItem('supportNegative'));
     let auxData = JSON.parse(localStorage.getItem('auxData'));
+    let scienceType = JSON.parse(localStorage.getItem('scienceType'));
+    console.log(scienceType)
+    pullID('scienceType').value = scienceType;
     pullID('offenseNegCounter').value = -Math.abs(offenseNegative);
     pullID('defenseNegCounter').value = -Math.abs(defenseNegative);
     pullID('supportNegCounter').value = -Math.abs(supportNegative);
