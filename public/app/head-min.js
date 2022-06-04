@@ -1,1 +1,1 @@
-function header(){$header();let e=pullID("header"),l=pullID("logoHold");pullID("navHold"),pullID("headNav");$h(1,l,"G20 Character Sheet (Dev)","","headTitle"),$b(e,"Go home",function(){location.reload()},"","")}
+function header(){$header();let l=pullID("header"),o=pullID("logoHold");pullID("navHold"),pullID("headNav");$h(1,o,"G20 Tools","","headTitle"),$b(l,"Go home",function(){location.reload()},"","")}

@@ -2,9 +2,18 @@
     font-family: Canterbury;
     src: url('/media/Canterbury.ttf');
 }
+::-webkit-scrollbar {
+    width: 1px;
+    // background-color: brown;
+}
 body{
     background-image: url("/media/bg_image.jpg");
+    background-attachment: fixed;
     font-family: Canterbury;
+    // width: 100vw;
+    overflow-x: hidden;
+    padding: 0px;
+    margin: 0.4em;
 }
 
 
@@ -160,4 +169,106 @@ input{
 #content{
     text-align: left;
 
+}
+
+
+#dm_tools{
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100vw;
+    // overflow-x: hidden;
+    // display: flex;
+    // float: center;
+    margin-top: 1em;
+    // overflow-y: hidden;
+    // text-align: center;
+    // height: 20vh; 
+    color: white;
+    font-size: 1em;
+    p{
+        margin-top: 1em;
+        margin-bottom: 0px;
+        padding-top: 0px;
+    }
+    textarea{
+        border-radius: 10px;
+    }
+    #players{
+        background-color: rgba(0, 0, 255, 0.253);
+        text-align: center;
+        overflow-x: auto;
+        display: flex;
+        height: 17em;
+        width: 100vw;
+        .playerDiv{
+            
+            flex: 1 0 auto;
+            // display: inline-block;
+            width: 18em!important;; 
+            height: 15em;
+            overflow-x: auto;
+            margin-right: 0.5em;
+            margin-bottom: 0px;
+            margin-top: 0.6em;
+            margin-left: 0.5em;
+            padding-bottom: 0.5em;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.507);
+            input{
+                width: 90%;
+            }
+            textarea{
+                width: 90%;
+                height: 10em;
+                resize: none;
+            }
+        }
+    }
+    #enemies{
+        background-color: rgba(255, 0, 0, 0.253);
+        text-align: center;
+        overflow-x: auto;
+        display: flex;
+        width: 100vw;
+        height: 25em;
+        .enemyDiv{
+            flex: 1 0 auto;
+            display: inline-block;
+            width: 18em;
+            margin-right: 0.5em;
+            margin-bottom: 0.5em;
+            margin-left: 0.5em;
+            margin-top: 0.6em;
+            padding-bottom: 0.5em;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.507);
+                    overflow-y: scroll;
+        }
+        input {
+            width: 90%;
+        }
+
+        textarea {
+            width: 90%;
+            height: 10em;
+            resize: none;
+        }
+    }
+    #initModule{
+        background-color: rgba(115, 255, 0, 0.253);
+            text-align: center;
+            overflow-x: auto;
+            display: flex;
+            width: 100vw;
+            height: 10em;
+        div{
+            margin-right: 1em;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.316);
+            width: 15em;
+        }
+        input{
+            width: 15em;
+        }
+    }
 }
