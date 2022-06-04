@@ -97,17 +97,30 @@ function initCreate(im) {
 
 function initParse(im) {
     console.log('????') 
-    for (let i = 0; i < actor_init_count; i++) {
-        let initObject = {};
-        let playerName = pullID('actorName' + i).value;
-        let playerInit = pullID('actorInit' + i).value;
-        initObject['playerInit'] = playerInit;
-        initObject['playerName'] = playerName;
-        initArray.push(initObject);
+    if(initArray = []){
+        for (let i = 0; i < actor_init_count; i++) {
+            let initObject = {};
+            let playerName = pullID('actorName' + i).value;
+            let playerInit = pullID('actorInit' + i).value;
+            initObject['playerInit'] = playerInit;
+            initObject['playerName'] = playerName;
+            initArray.push(initObject);
+        } 
+    } else {
+        initArray = [];
+        for (let i = 0; i < actor_init_count; i++) {
+            let initObject = {};
+            let playerName = pullID('actorName' + i).value;
+            let playerInit = pullID('actorInit' + i).value;
+            initObject['playerInit'] = playerInit;
+            initObject['playerName'] = playerName;
+            initArray.push(initObject);
+        } 
     }
+    
 
-    initArrayParsed = initArray.sort(function (a, b) { return a.playerInit - b.playerInit });
-    pullID('initModule').remove();
+    initArrayParsed = (initArray.sort(function (a, b) { return a.playerInit - b.playerInit })).reverse();
+    pullID('initModule').remove();  
     initWorker();
 
 }
