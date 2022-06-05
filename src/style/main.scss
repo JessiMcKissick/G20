@@ -68,6 +68,19 @@ input{
         color: #00000000;
         visibility: hidden;
     }
+    .imp_exp_button{
+        padding: 0px;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    #importButton{
+        background-color: green;
+        color: white;
+    }
+    #exportButton{
+        background-color: red;
+        color: white;
+    }
 }
 
 #scienceType{

@@ -265,44 +265,9 @@ function proceduralUI(a, b, c, d) {
 //////////////////////////////
 //////////////////////////////
 function save() { // Simply saves data to browser storage
-    var saveObj = {};
-    var off = [];
-    var def = [];
-    var sup = [];
-    let featName = [];
-    let featInf = [];
-    let featNameStory = [];
-    let featInfStory = [];
-    let scienceType = pullID('scienceType').value;
 
-    saveObj.name = pullID('charName').value;
-    saveObj.hp = pullID('charHP').value;
-    saveObj.armor = pullID('charArmor').value;
-
-
-    for (let i = 0; i < 11; i++) {
-        let state = pullID('selerOf' + [i]).value;
-        off.push(state);
-    }
-    for (let i = 0; i < 10; i++) {
-        let state = pullID('selerDe' + [i]).value;
-        def.push(state);
-    }
-    for (let i = 0; i < 12; i++) {
-        let state = pullID('selerSu' + [i]).value;
-        sup.push(state);
-    } 
-    saveObj.off = off;
-    saveObj.def = def;
-    saveObj.sup = sup;
-
-    saveObj.defenseNegative = defNeg;
-    saveObj.offenseNegative = offNeg;
-    saveObj.supportNegative = supNeg;
-    saveObj.auxData = auxPoints;
-    saveObj.scienceType = scienceType;
-
-    console.log(saveObj);
+    let saveObj = generateObject();
+    // console.log(saveObj);
     localStorage.setItem('sheet' + localStorage.length, JSON.stringify(saveObj));    
 
 }
@@ -311,6 +276,9 @@ function save() { // Simply saves data to browser storage
 function load(data){
     if (data == undefined) {
         engine();
+        $b(pullID('sheet'), 'Export', function(){exportSheet()}, 'imp_exp_button','exportButton');
+        $input(pullID('sheet'),'','','importBox','','','Import sheet');
+        $b(pullID('sheet'),'import',function(){importSheet()},'imp_exp_button','importButton');
     }
     let sheet = pullID('sheet');
     if(data == undefined){
@@ -374,6 +342,59 @@ function loadState(state) {
 
 
 
+function exportSheet() {
+    let sheet = generateObject();
+    let target = pullID('sheet');
+    try{
+        pullID('exportString').remove();
+    } catch {
+
+    }
+    $p(target, JSON.stringify(sheet),'','exportString');
+
+}
+
+function importSheet(){
+    let data = pullID('importBox').value;
+    load(JSON.parse(data));
+}
+
+
+function generateObject() {
+    var saveObj = {};
+    var off = [];
+    var def = [];
+    var sup = [];
+    let scienceType = pullID('scienceType').value;
+    saveObj.name = pullID('charName').value;
+    saveObj.hp = pullID('charHP').value;
+    saveObj.armor = pullID('charArmor').value;
+
+
+    for (let i = 0; i < 11; i++) {
+        let state = pullID('selerOf' + [i]).value;
+        off.push(state);
+    }
+    for (let i = 0; i < 10; i++) {
+        let state = pullID('selerDe' + [i]).value;
+        def.push(state);
+    }
+    for (let i = 0; i < 12; i++) {
+        let state = pullID('selerSu' + [i]).value;
+        sup.push(state);
+    }
+    saveObj.off = off;
+    saveObj.def = def;
+    saveObj.sup = sup;
+
+    saveObj.defenseNegative = defNeg;
+    saveObj.offenseNegative = offNeg;
+    saveObj.supportNegative = supNeg;
+    saveObj.auxData = auxPoints;
+    saveObj.scienceType = scienceType;
+    return saveObj;
+
+}
 
 
 /////////////////////////////////////////========================================/////////////////////////////
