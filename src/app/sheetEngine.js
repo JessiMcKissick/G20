@@ -288,26 +288,26 @@ function save() { // Simply saves data to browser storage
         let state = pullID('selerSu' + [i]).value;
         sup.push(state);
     }
-    for (let i = 0; i < 5; i++) {
-        let state1 = pullID('fName' + i).value;
-        let state2 = pullID('fInf' + i).value;
-        featName.push(state1);
-        featInf.push(state2);
-    }
-    for (let i = 0; i < 5; i++) {
-        let state1 = pullID('fNameSt' + i).value;
-        let state2 = pullID('fInfSt' + i).value;
-        console.log(state1)
-        featNameStory.push(state1);
-        featInfStory.push(state2);
-    }
+    // for (let i = 0; i < 5; i++) {
+    //     let state1 = pullID('fName' + i).value;
+    //     let state2 = pullID('fInf' + i).value;
+    //     featName.push(state1);
+    //     featInf.push(state2);
+    // }
+    // for (let i = 0; i < 5; i++) {
+    //     let state1 = pullID('fNameSt' + i).value;
+    //     let state2 = pullID('fInfSt' + i).value;
+    //     console.log(state1)
+    //     featNameStory.push(state1);
+    //     featInfStory.push(state2);
+    // }
     localStorage.setItem('offense', JSON.stringify(off));
     localStorage.setItem('defense', JSON.stringify(def));
     localStorage.setItem('support', JSON.stringify(sup));
-    localStorage.setItem('featNames', JSON.stringify(featName));
-    localStorage.setItem('featInfo', JSON.stringify(featInf));
-    localStorage.setItem('featNameStory', JSON.stringify(featNameStory));
-    localStorage.setItem('featInfoStory', JSON.stringify(featInfStory));
+    // localStorage.setItem('featNames', JSON.stringify(featName));
+    // localStorage.setItem('featInfo', JSON.stringify(featInf));
+    // localStorage.setItem('featNameStory', JSON.stringify(featNameStory));
+    // localStorage.setItem('featInfoStory', JSON.stringify(featInfStory));
     localStorage.setItem('defenseNegative', JSON.stringify(defNeg));
     localStorage.setItem('offenseNegative', JSON.stringify(offNeg));
     localStorage.setItem('supportNegative', JSON.stringify(supNeg));
@@ -321,10 +321,10 @@ function load() { // Loads data from browser storage
     let off = JSON.parse(localStorage.getItem('offense'));
     let def = JSON.parse(localStorage.getItem('defense'));
     let sup = JSON.parse(localStorage.getItem('support'));
-    let featNames = JSON.parse(localStorage.getItem('featNames'));
-    let featInf = JSON.parse(localStorage.getItem('featInfo'));
-    let featNameStory = JSON.parse(localStorage.getItem('featNameStory'));
-    let featInfStory = JSON.parse(localStorage.getItem('featInfoStory'));
+    // let featNames = JSON.parse(localStorage.getItem('featNames'));
+    // let featInf = JSON.parse(localStorage.getItem('featInfo'));
+    // let featNameStory = JSON.parse(localStorage.getItem('featNameStory'));
+    // let featInfStory = JSON.parse(localStorage.getItem('featInfoStory'));
     let defenseNegative = JSON.parse(localStorage.getItem('defenseNegative'));
     let offenseNegative = JSON.parse(localStorage.getItem('offenseNegative'));
     let supportNegative = JSON.parse(localStorage.getItem('supportNegative'));
@@ -352,18 +352,18 @@ function load() { // Loads data from browser storage
         }
 
 
-        for (let i = 0; i < featNames.length; i++) {
-            pullID('fName' + i).value = featNames[i];
-        }
-        for (let i = 0; i < featInf.length; i++) {
-            pullID('fInf' + i).value = featInf[i];
-        }
-        for (let i = 0; i < featNameStory.length; i++) {
-            pullID('fNameSt' + i).value = featNameStory[i];
-        }
-        for (let i = 0; i < featInfStory.length; i++) {
-            pullID('fInfSt' + i).value = featInfStory[i];
-        }
+        // for (let i = 0; i < featNames.length; i++) {
+        //     pullID('fName' + i).value = featNames[i];
+        // }
+        // for (let i = 0; i < featInf.length; i++) {
+        //     pullID('fInf' + i).value = featInf[i];
+        // }
+        // for (let i = 0; i < featNameStory.length; i++) {
+        //     pullID('fNameSt' + i).value = featNameStory[i];
+        // }
+        // for (let i = 0; i < featInfStory.length; i++) {
+        //     pullID('fInfSt' + i).value = featInfStory[i];
+        // }
 
         pullID('charName').value = lo('name');
     }
