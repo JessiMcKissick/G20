@@ -265,6 +265,7 @@ function proceduralUI(a, b, c, d) {
 //////////////////////////////
 //////////////////////////////
 function save() { // Simply saves data to browser storage
+    var saveObj = {};
     var off = [];
     var def = [];
     var sup = [];
@@ -273,9 +274,15 @@ function save() { // Simply saves data to browser storage
     let featNameStory = [];
     let featInfStory = [];
     let scienceType = pullID('scienceType').value;
-    localStorage.setItem('name', pullID('charName').value);
-    localStorage.setItem('hp', pullID('charHP').value);
-    localStorage.setItem('armor', pullID('charArmor').value);
+
+    saveObj.name = pullID('charName').value;
+    saveObj.hp = pullID('charHP').value;
+    saveObj.armor = pullID('charArmor').value;
+
+
+    // localStorage.setItem('name', pullID('charName').value);
+    // localStorage.setItem('hp', pullID('charHP').value);
+    // localStorage.setItem('armor', pullID('charArmor').value);
     for (let i = 0; i < 11; i++) {
         let state = pullID('selerOf' + [i]).value;
         off.push(state);
@@ -287,7 +294,18 @@ function save() { // Simply saves data to browser storage
     for (let i = 0; i < 12; i++) {
         let state = pullID('selerSu' + [i]).value;
         sup.push(state);
-    }
+    } 
+    saveObj.off = off;
+    saveObj.def = def;
+    saveObj.sup = sup;
+
+    saveObj.defenseNegative = defNeg;
+    saveObj.offenseNegative = offNeg;
+    saveObj.supportNegative = supNeg;
+    saveObj.auxData = auxPoints;
+    saveObj.scienceType = scienceType;
+
+    console.log(saveObj);
     // for (let i = 0; i < 5; i++) {
     //     let state1 = pullID('fName' + i).value;
     //     let state2 = pullID('fInf' + i).value;
@@ -301,36 +319,58 @@ function save() { // Simply saves data to browser storage
     //     featNameStory.push(state1);
     //     featInfStory.push(state2);
     // }
-    localStorage.setItem('offense', JSON.stringify(off));
-    localStorage.setItem('defense', JSON.stringify(def));
-    localStorage.setItem('support', JSON.stringify(sup));
-    // localStorage.setItem('featNames', JSON.stringify(featName));
-    // localStorage.setItem('featInfo', JSON.stringify(featInf));
-    // localStorage.setItem('featNameStory', JSON.stringify(featNameStory));
-    // localStorage.setItem('featInfoStory', JSON.stringify(featInfStory));
-    localStorage.setItem('defenseNegative', JSON.stringify(defNeg));
-    localStorage.setItem('offenseNegative', JSON.stringify(offNeg));
-    localStorage.setItem('supportNegative', JSON.stringify(supNeg));
-    localStorage.setItem('auxData', JSON.stringify(auxPoints));
-    localStorage.setItem('scienceType', JSON.stringify(scienceType));
+    // localStorage.setItem('offense', JSON.stringify(off));
+    // localStorage.setItem('defense', JSON.stringify(def));
+    // localStorage.setItem('support', JSON.stringify(sup));
+    // // localStorage.setItem('featNames', JSON.stringify(featName));
+    // // localStorage.setItem('featInfo', JSON.stringify(featInf));
+    // // localStorage.setItem('featNameStory', JSON.stringify(featNameStory));
+    // // localStorage.setItem('featInfoStory', JSON.stringify(featInfStory));
+    // localStorage.setItem('defenseNegative', JSON.stringify(defNeg));
+    // localStorage.setItem('offenseNegative', JSON.stringify(offNeg));
+    // localStorage.setItem('supportNegative', JSON.stringify(supNeg));
+    // localStorage.setItem('auxData', JSON.stringify(auxPoints));
+    // localStorage.setItem('scienceType', JSON.stringify(scienceType));
+    localStorage.setItem('sheet' + localStorage.length, JSON.stringify(saveObj));    
 
 }
 
-function load() { // Loads data from browser storage
-    engine();
-    let off = JSON.parse(localStorage.getItem('offense'));
-    let def = JSON.parse(localStorage.getItem('defense'));
-    let sup = JSON.parse(localStorage.getItem('support'));
-    // let featNames = JSON.parse(localStorage.getItem('featNames'));
-    // let featInf = JSON.parse(localStorage.getItem('featInfo'));
-    // let featNameStory = JSON.parse(localStorage.getItem('featNameStory'));
-    // let featInfStory = JSON.parse(localStorage.getItem('featInfoStory'));
-    let defenseNegative = JSON.parse(localStorage.getItem('defenseNegative'));
-    let offenseNegative = JSON.parse(localStorage.getItem('offenseNegative'));
-    let supportNegative = JSON.parse(localStorage.getItem('supportNegative'));
-    let auxData = JSON.parse(localStorage.getItem('auxData'));
-    let scienceType = JSON.parse(localStorage.getItem('scienceType'));
-    console.log(scienceType)
+
+function load(data){
+    if (data == undefined) {
+        engine();
+    }
+    let sheet = pullID('sheet');
+    if(data == undefined){
+        $sel(sheet, '', 'profileSelector'); let prof = pullID('profileSelector');
+        for (let i = 0; i < localStorage.length; i++) {
+            let targetObject = JSON.parse(localStorage.getItem('sheet' + i));
+            $opt(prof, targetObject.name, '');
+        }
+        prof.onchange = function () { load(true) }
+    }
+    let prof = pullID('profileSelector');
+
+    let current;
+    for(let i = 0; i<localStorage.length; i++){
+        let tar = JSON.parse(localStorage.getItem('sheet' + i));
+        if(tar.name == prof.value){
+            current = tar;
+        }
+    }
+    loadState(current);
+}
+
+function loadState(state) {
+    let off = state.off;
+    let def = state.def;
+    let sup = state.sup;
+    let defenseNegative = state.defenseNegative;
+    let offenseNegative = state.offenseNegative;
+    let supportNegative = state.supportNegative;
+    let auxData = state.auxPoints;
+    let scienceType = state.scienceType;
+
     pullID('scienceType').value = scienceType;
     pullID('offenseNegCounter').value = -Math.abs(offenseNegative);
     pullID('defenseNegCounter').value = -Math.abs(defenseNegative);
@@ -350,24 +390,8 @@ function load() { // Loads data from browser storage
         for (let i = 0; i < sup.length; i++) {
             pullID('selerSu' + [i]).value = sup[i];
         }
-
-
-        // for (let i = 0; i < featNames.length; i++) {
-        //     pullID('fName' + i).value = featNames[i];
-        // }
-        // for (let i = 0; i < featInf.length; i++) {
-        //     pullID('fInf' + i).value = featInf[i];
-        // }
-        // for (let i = 0; i < featNameStory.length; i++) {
-        //     pullID('fNameSt' + i).value = featNameStory[i];
-        // }
-        // for (let i = 0; i < featInfStory.length; i++) {
-        //     pullID('fInfSt' + i).value = featInfStory[i];
-        // }
-
-        pullID('charName').value = lo('name');
+        pullID('charName').value = state.name;
     }
-    // updateData();
     update('off');
     update('def');
     update('sup');
