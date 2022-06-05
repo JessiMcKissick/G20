@@ -280,9 +280,6 @@ function save() { // Simply saves data to browser storage
     saveObj.armor = pullID('charArmor').value;
 
 
-    // localStorage.setItem('name', pullID('charName').value);
-    // localStorage.setItem('hp', pullID('charHP').value);
-    // localStorage.setItem('armor', pullID('charArmor').value);
     for (let i = 0; i < 11; i++) {
         let state = pullID('selerOf' + [i]).value;
         off.push(state);
@@ -306,31 +303,6 @@ function save() { // Simply saves data to browser storage
     saveObj.scienceType = scienceType;
 
     console.log(saveObj);
-    // for (let i = 0; i < 5; i++) {
-    //     let state1 = pullID('fName' + i).value;
-    //     let state2 = pullID('fInf' + i).value;
-    //     featName.push(state1);
-    //     featInf.push(state2);
-    // }
-    // for (let i = 0; i < 5; i++) {
-    //     let state1 = pullID('fNameSt' + i).value;
-    //     let state2 = pullID('fInfSt' + i).value;
-    //     console.log(state1)
-    //     featNameStory.push(state1);
-    //     featInfStory.push(state2);
-    // }
-    // localStorage.setItem('offense', JSON.stringify(off));
-    // localStorage.setItem('defense', JSON.stringify(def));
-    // localStorage.setItem('support', JSON.stringify(sup));
-    // // localStorage.setItem('featNames', JSON.stringify(featName));
-    // // localStorage.setItem('featInfo', JSON.stringify(featInf));
-    // // localStorage.setItem('featNameStory', JSON.stringify(featNameStory));
-    // // localStorage.setItem('featInfoStory', JSON.stringify(featInfStory));
-    // localStorage.setItem('defenseNegative', JSON.stringify(defNeg));
-    // localStorage.setItem('offenseNegative', JSON.stringify(offNeg));
-    // localStorage.setItem('supportNegative', JSON.stringify(supNeg));
-    // localStorage.setItem('auxData', JSON.stringify(auxPoints));
-    // localStorage.setItem('scienceType', JSON.stringify(scienceType));
     localStorage.setItem('sheet' + localStorage.length, JSON.stringify(saveObj));    
 
 }

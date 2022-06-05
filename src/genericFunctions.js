@@ -23,7 +23,7 @@ function loadApplets(){
     isApplet = true;
     router();
 }
-
+ 
 
 // Note: Relearn how to save to browser cache, save each sheet in cache as a seperate cache entry in string form
 // Allow import/export of stringified sheet data.
