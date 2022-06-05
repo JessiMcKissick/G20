@@ -16,7 +16,7 @@ function ui(con) {
     $b(pc, 'Add Player', function () { playerGen() }, 'button', '');
     $d(dm_tools, '', 'players');
     $d(dm_tools, '', 'enemyControl'); let ec = pullID('enemyControl');
-    $b(ec, 'Add NPC', function () { npmGen() }, 'button', '');
+    $b(ec, 'Add NPC', function () { npcGen() }, 'button', '');
     $d(dm_tools, '', 'enemies');
     $a(dm_tools, 'G20 DM Guide', 'https://docs.google.com/document/d/1SJQqdMNBLsuvdvN-fNe0UobYpFaskkDBKXHkjqhzugs/edit', '', 'g20Guide');
     pullID('g20Guide').target = '_blank';
@@ -41,7 +41,7 @@ function playerGen() {
     pc_count += 1;
 }
 
-function npmGen() {
+function npcGen() {
     let con = pullID('enemies');
     $d(con, 'enemyDiv', 'enemy' + en_count); let enemy = pullID('enemy' + en_count);
     $h(3, enemy, 'Enemy ' + (en_count + 1));
