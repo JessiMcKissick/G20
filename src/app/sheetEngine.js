@@ -175,8 +175,11 @@ function generateUI() {
     //     $input(form, 'fInf', '', 'fInf' + i, 'text', 'fname1', 'Feat name');
 
     // } 
+    $b(pullID('sheet'), 'Export', function () { exportSheet() }, 'imp_exp_button', 'exportButton');
+    $input(pullID('sheet'), '', '', 'importBox', '', '', 'Import sheet');
+    $b(pullID('sheet'), 'import', function () { importSheet() }, 'imp_exp_button', 'importButton');
 }
-
+ 
 
 
 
@@ -276,9 +279,6 @@ function save() { // Simply saves data to browser storage
 function load(data){
     if (data == undefined) {
         engine();
-        $b(pullID('sheet'), 'Export', function(){exportSheet()}, 'imp_exp_button','exportButton');
-        $input(pullID('sheet'),'','','importBox','','','Import sheet');
-        $b(pullID('sheet'),'import',function(){importSheet()},'imp_exp_button','importButton');
     }
     let sheet = pullID('sheet');
     if(data == undefined){
