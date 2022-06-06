@@ -17,6 +17,7 @@ let itemList = [
     'Performance', 'Magic', 'Gadgetry', 'Medicine', 'Summon', 'Perception (Physical)', 'Perception (Magical)',
     'Perception (Insight)', 'Provisions', 'Science', 'Might', 'Sleight Of Hand'
 ]
+// Stat variables
 let auxCount = 30; // Base points
 var auxoff = 0;
 var auxdef = 0;
@@ -31,16 +32,12 @@ var auxPoints = 30;
 let offPointMax = 10;
 let defPointMax = 10;
 let supPointMax = 10;
-
 let offComb = 0;
 let defComb = 0;
 let supComb = 0;
-
 var offSkillID = []
 var defSkillID = []
 var supSkillID = []
-
-
 // Variables for the negative number system
 var defNeg = 0;
 var offNeg = 0;
@@ -64,12 +61,11 @@ function engine(type) { // Core sheet generation and assignment engine
 
     updateData();
 
-    // $hr(con)
     $b(con, 'Save Data', function () { save() });
 }
 
 
-
+// UI Section ///////////////////////////////////////////////////////////////////////////////////////////
 
 function generateUI() {
     $d(body, '', 'content');
@@ -89,8 +85,6 @@ function generateUI() {
     $d(grid, 'subGrid', 'offenseGrid'); let ofGrid = pullID('offenseGrid');
     $d(grid, 'subGrid', 'defenseGrid'); let deGrid = pullID('defenseGrid');
     $d(grid, 'subGrid', 'supportGrid'); let suGrid = pullID('supportGrid');
-    // Todo: put a selecter before each box with 0, -1, and -2. 
-
     $p(deGrid,'Negative modifier');
     $sel(deGrid, '', 'defenseNegCounter');
     $p(ofGrid, 'Negative modifier');
@@ -99,10 +93,6 @@ function generateUI() {
     $sel(suGrid, '', 'supportNegCounter');
     for(let i = 0; i < 3; i++) {
         $opt(pullID('defenseNegCounter'), -Math.abs(i), '', '');
-
-        // pullID('selerOf' + i).onchange = function () {
-        //     update('off', ('selerOf' + i));
-        // };
         
     }
     pullID('defenseNegCounter').onchange = function () {
@@ -117,7 +107,6 @@ function generateUI() {
             } else {
                 pullID('selerDe' + i).value = 0 - defNeg;
             }
-            // id.value -= defNeg;
         }
         console.log(defNeg);
         update('def');
@@ -138,7 +127,6 @@ function generateUI() {
             } else {
                 pullID('selerOf' + i).value = 0 - offNeg;
             }
-            // id.value -= defNeg;
         }
         console.log(offNeg);
         update('off');
@@ -161,7 +149,6 @@ function generateUI() {
             } else {
                 pullID('selerSu' + i).value = 0 - supNeg;
             }
-            // id.value -= defNeg;
         }
         console.log(defNeg);
         update('sup');
@@ -170,19 +157,11 @@ function generateUI() {
     $h(3, ofGrid, 'Offense Points: ' + offPoints, 'pointCount', 'offPointCounter');
     $h(3, suGrid, 'Support Points: ' + supPoints, 'pointCount', 'supPointCounter');
     $hr(form)
-    // for (let i; i < 5; i++) {
-    //     $input(form, 'fName', '', 'fName' + i, 'text', 'fname1', 'Feat name');
-    //     $input(form, 'fInf', '', 'fInf' + i, 'text', 'fname1', 'Feat name');
-
-    // } 
     $b(pullID('sheet'), 'Export', function () { exportSheet() }, 'imp_exp_button', 'exportButton');
     $input(pullID('sheet'), '', '', 'importBox', '', '', 'Import sheet');
     $b(pullID('sheet'), 'import', function () { importSheet() }, 'imp_exp_button', 'importButton');
 }
  
-
-
-
 function proceduralUI(a, b, c, d) {
     for (let i = 0; i < 11; i++) {
         console.log('A tick')
@@ -231,38 +210,12 @@ function proceduralUI(a, b, c, d) {
             $opt(suSel, e, '', '');
         }
     };
-    // $hr(d)
-    // for (let i = 0; i < 5; i++) {
-    //     if(i%2 == 0){
-    //         $d(d, 'featDiv', 'featNo' + i);
-    //     } else {
-    //         $d(d, 'featDivAlt', 'featNo' + i);
-
-    //     }
-    //     let div = pullID('featNo' + i);
-    //     $input(div, '', 'fName', 'fName' + i, 'text', '', 'Feat Name');
-    //     $area(div,'','fInfo','fInf' + i,'Feat Info');
-    //     // $input(div, '', 'fInfo', 'fInf' + i, 'textArea','', 'Feat Info');
-    // }
-    // // $hr(d);
-    // for (let i = 0; i < 5; i++) {
-    //     let divAlta = eval('featNo' + i);
-    //     if (i % 2 == 0) {
-    //         $d(divAlta, 'featDivStory', 'featStNo' + i);
-    //     } else {
-    //         $d(divAlta, 'featDivStoryAlt', 'featStNo' + i);
-    //     }
-    //     let divAlt = pullID('featStNo' + i);
-    //     $input(divAlt, '','fName', 'fNameSt' + i, 'text', '', 'Story Feat Name');
-    //     // $input(divAlt, '', 'fInfo', 'fInfSt' + i, 'textArea', '', 'Story Feat Info');
-    //     $area(divAlt, '', 'fInfo', 'fInfSt' + i, 'Story Feat Info');
-
-    // }
     for (let i = 0; i < 12; i++) {
         pullID('selerSu' + i).value = 0;    
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Save and load functionality
 //////////////////////////////
@@ -270,7 +223,6 @@ function proceduralUI(a, b, c, d) {
 function save() { // Simply saves data to browser storage
 
     let saveObj = generateObject();
-    // console.log(saveObj);
     localStorage.setItem('sheet' + localStorage.length, JSON.stringify(saveObj));    
 
 }
@@ -292,12 +244,19 @@ function load(data){
     let prof = pullID('profileSelector');
 
     let current;
-    for(let i = 0; i<localStorage.length; i++){
-        let tar = JSON.parse(localStorage.getItem('sheet' + i));
-        if(tar.name == prof.value){
-            current = tar;
+    if(prof == undefined){
+        current = data;
+    } else {
+        for(let i = 0; i<localStorage.length; i++){
+            let tar = JSON.parse(localStorage.getItem('sheet' + i));
+            if(tar.name == prof.value){
+                current = tar;
+            }
         }
+        
     }
+
+
     loadState(current);
 }
 
@@ -341,7 +300,8 @@ function loadState(state) {
 ////////////////////////////
 
 
-
+// Import/Export Functions////////////////////////////
+/////////////////////////////////////////////////////
 function exportSheet() {
     let sheet = generateObject();
     let target = pullID('sheet');
@@ -356,10 +316,16 @@ function exportSheet() {
 
 function importSheet(){
     let data = pullID('importBox').value;
+    console.log(data);
     load(JSON.parse(data));
 }
 
+// End import/Export////////////////////////////////
+////////////////////////////////////////////////////
 
+
+// Generic functions ///////////////////////////
+///////////////////////////////////////////////
 function generateObject() {
     var saveObj = {};
     var off = [];
@@ -396,10 +362,8 @@ function generateObject() {
 
 }
 
-
-/////////////////////////////////////////========================================/////////////////////////////
-
-
+// End generic functions //////////////////////
+//////////////////////////////////////////////
 
 
 //Update functions////////////
@@ -574,15 +538,3 @@ let updateAssist = (type) => { // This does the work of checking each box's valu
 }
 //////end of update functions///////////////
 ////////////////////////////////////////////
-
-
-
-
-///////////////////////////////======================================///////////////////
-
-function sa(a, b) { // Saves an item to storage
-    localStorage.setItem(a, b);
-}
-function lo(a) { // Loads an item from storage
-    return localStorage.getItem(a);
-}
