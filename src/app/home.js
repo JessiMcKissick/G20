@@ -7,5 +7,5 @@ function home(){
     $b(con,'📝 Load Sheet',function(){router('load()')}, 'button', '');
     $b(con,'📱 Applets', function(){router('applets()')}, 'button','');
     $b(con, '👑 DM Console', function(){router('dm()')}, 'button', '');
-    $b(con,'❌ Delete Sheet', function(){localStorage.clear()},'button');
+    $b(con,'❌ Delete Sheet', function(){localStorage.clear(); alert('Sheets purged!')},'button');
 } 

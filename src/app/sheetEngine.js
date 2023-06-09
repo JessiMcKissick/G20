@@ -59,7 +59,7 @@ function engine(type) { // Core sheet generation and assignment engine
 
     updateData();
 
-    $b(con, 'Save Data', function () { save() });
+    $b(con, 'Save Data', function () { save() },'button');
 }
 
 
@@ -70,12 +70,13 @@ function generateUI() {
     let con = pullID('content');
     $form(con, '', 'sheet')
     let form = pullID('sheet');
-    $h(3, form, 'Auxilary points: ' + auxCount, '', 'auxCounter');
-    $d(form, '', 'charnameBox'); let charBox = pullID('charnameBox');
+    $d(form,'','metaBox'); let meta = pullID('metaBox');
+    $h(3, meta, 'Auxilary points: ' + auxCount, '', 'auxCounter');
+    $d(meta, '', 'charnameBox'); let charBox = pullID('charnameBox');
     $input(charBox, 'Name', 'sheetData', 'charName', 'text', 'sheetName', 'Character Name', '');
-    $d(form, '', 'hpBox'); let hpBox = pullID('hpBox');
+    $d(meta, '', 'hpBox'); let hpBox = pullID('hpBox');
     $input(hpBox, 'HP', 'sheetData', 'charHP', 'text', 'sheetHP', 'HP', 'true');
-    $d(form,'','armorBox'); let armorBox = pullID('armorBox');
+    $d(meta,'','armorBox'); let armorBox = pullID('armorBox');
     $input(armorBox, 'Armor', 'sheetData', 'charArmor', 'text', 'sheetArm', 'Armor', 'true');
 
     $hr(form, '', '');
@@ -156,9 +157,10 @@ function generateUI() {
     $h(3, ofGrid, 'Offense Points: ' + offPoints, 'pointCount', 'offPointCounter');
     $h(3, suGrid, 'Support Points: ' + supPoints, 'pointCount', 'supPointCounter');
     $hr(form)
-    $b(pullID('sheet'), 'Export', function () { exportSheet() }, 'imp_exp_button', 'exportButton');
-    $input(pullID('sheet'), '', '', 'importBox', '', '', 'Import sheet');
-    $b(pullID('sheet'), 'import', function () { importSheet() }, 'imp_exp_button', 'importButton');
+    // $d(pullID('sheet'),'','importBoxDiv'); let impbox = pullID('importBoxDiv');
+    // $b(impbox, 'Export', function () { exportSheet() }, 'imp_exp_button', 'exportButton');
+    // $input(impbox, '', '', 'importBox', '', '', 'Import sheet');
+    // $b(impbox, 'import', function () { importSheet() }, 'imp_exp_button', 'importButton');
 }
  
 // Item list has been replaced with offenselist defenselist and supportlist
@@ -219,8 +221,7 @@ let ranks = ['Trash Panda', 'Ally', 'Initiate', 'Guardian', 'Vigilant', 'Archon'
 ///////////////////////////////////////////////////////////////////////////////
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
 ///////////////////////////////////////////////////////////////////////////////
-// TODO: Add description boxes for feats and techs
-// https://docs.google.com/spreadsheets/d/1hL9rfueX2loDDZCIXVAtHse99B1qGYX2xGjpqIlddbo/edit?pli=1#gid=0
+
 
 
 function generate_charData(){ // Current project !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -229,13 +230,17 @@ function generate_charData(){ // Current project !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         if(charDatList[i] == 'Occupation' || charDatList[i] == 'Feature' || charDatList[i] == 'Knowledge' || charDatList[i] == 'Technique' || charDatList[i] == 'Special'){
             $d(charData,'housing',charDatList[i] + 'houseDiv'); let newDiv = pullID(charDatList[i] + 'houseDiv');
             for(let e = 0; e < 3; e++){
-                $d(newDiv,'dataItem', (charDatList[i]) + e); let item = pullID(charDatList[i] + e);
-                $input(item,'','input',charDatList[i] + e,'','',charDatList[i] + ' ' + (e+1) + ":");
+                $d(newDiv,'dataItem', (charDatList[i]) + e + 'div'); let item = pullID(charDatList[i] + e + 'div');
+                // $input(item,'','input',charDatList[i] + e,'','',charDatList[i] + ' ' + (e+1) + ":");
+                $area(item, '', 'input', charDatList[i] + e, charDatList[i] + ' ' + (e + 1) + ":")
+                // if(charDatList[i] == 'Feature' || charDatList[i] == 'Technique'){
+                //     $area(item,'','datArea',charDatList[i] + "area" + e,charDatList[i] + ' ' + (e+1) + ' description:' )
+                // }
             }
         }
 
         if(charDatList[i] == 'Rank'){ //TODO: Populate rank
-            $d(charData, 'dataItem', 'rankDiv'); let item = pullID('rankDiv');
+            $d(charData, 'dataItemTitle', 'rankDiv'); let item = pullID('rankDiv');
             $p(item, 'Rank: ','label');
             $sel(item,'','rankSel'); let selector = pullID('rankSel');
             for(let n = 0; n < ranks.length; n++){
@@ -246,7 +251,7 @@ function generate_charData(){ // Current project !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
 
         if(charDatList[i] == 'Title'){
-            $d(charData, 'dataItem', 'charTitle'); let item = pullID('charTitle');
+            $d(charData, 'dataItemTitle', 'charTitle'); let item = pullID('charTitle');
             $input(item, '', 'input', 'Title','','','Title:'); 
 
         }
@@ -259,10 +264,17 @@ function generate_charData(){ // Current project !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // Save and load functionality
 //////////////////////////////
 //////////////////////////////
+////////////////////////////////////WORKING HERE////////////////////////////////////
+///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!///////////!!!!!!!!!!!!!!!!!!!!!!/////////////////
 function save() { // Simply saves data to browser storage
 
     let saveObj = generateObject();
-    localStorage.setItem('sheet' + localStorage.length, JSON.stringify(saveObj));    
+    try{
+        localStorage.setItem('sheet' + localStorage.length, JSON.stringify(saveObj));
+        alert('Saved successfully!')
+    } catch {
+        alert('Save failed! See console for error.');
+    }
 
 }
 
@@ -310,6 +322,11 @@ function loadState(state) {
     let offenseNegative = state.offenseNegative;
     let supportNegative = state.supportNegative;
     let auxData = state.auxPoints;
+    let occupation = state.occupation;
+    let feature = state.feature;
+    let technique = state.technique;
+    let knowledge = state.knowledge;
+    let special = state.special;
 
     pullID('offenseNegCounter').value = -Math.abs(offenseNegative);
     pullID('defenseNegCounter').value = -Math.abs(defenseNegative);
@@ -331,6 +348,24 @@ function loadState(state) {
         }
         pullID('charName').value = state.name;
     }
+    for(let i = 0; i < occupation.length;i++){
+        pullID('Occupation' + i).value = occupation[i];
+    }
+    for (let i = 0; i < feature.length; i++) {
+        pullID('Feature' + i).value = feature[i];
+    }
+    for (let i = 0; i < technique.length; i++) {
+        pullID('Technique' + i).value = technique[i];
+    }
+    for (let i = 0; i < knowledge.length; i++) {
+        pullID('Knowledge' + i).value = knowledge[i];
+    }
+    for (let i = 0; i < special.length; i++) {
+        pullID('Special' + i).value = special[i];
+    }
+    pullID('Title').value = state.title;
+    pullID('rankSel').value = state.rank;
+
     update('off');
     update('def');
     update('sup');
@@ -366,15 +401,23 @@ function importSheet(){
 
 // Generic functions ///////////////////////////
 ///////////////////////////////////////////////
+
+////TODO: Add all the new attributes to saved object.
 function generateObject() {
     var saveObj = {};
     var off = [];
     var def = [];
     var sup = [];
+    var occupation = [];
+    var feature = [];
+    var technique = [];
+    var knowledge = [];
+    var special = [];
     saveObj.name = pullID('charName').value;
     saveObj.hp = pullID('charHP').value;
     saveObj.armor = pullID('charArmor').value;
-
+    saveObj.title = pullID('Title').value;
+    saveObj.rank = pullID('rankSel').value;
 
     for (let i = 0; i < offenseList.length; i++) {
         let state = pullID('selerOf' + [i]).value;
@@ -388,6 +431,32 @@ function generateObject() {
         let state = pullID('selerSu' + [i]).value;
         sup.push(state);
     }
+    for (let i = 0; i < 3; i++) {
+        let state = pullID('Occupation' + i).value;
+        occupation.push(state);
+    }
+    for (let i = 0; i < 3; i++) {
+        let state = pullID('Feature' + i).value;
+        feature.push(state);
+    }
+    for (let i = 0; i < 3; i++) {
+        let state = pullID('Technique' + i).value;
+        technique.push(state);
+    }
+    for (let i = 0; i < 3; i++) {
+        let state = pullID('Knowledge' + i).value;
+        knowledge.push(state);
+    }
+    for (let i = 0; i < 3; i++) {
+        let state = pullID('Special' + i).value;
+        special.push(state);
+    }
+    saveObj.occupation = occupation;
+    saveObj.feature = feature;
+    saveObj.technique = technique;
+    saveObj.knowledge = knowledge;
+    saveObj.special = special;
+
     saveObj.off = off;
     saveObj.def = def;
     saveObj.sup = sup;

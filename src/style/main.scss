@@ -51,9 +51,22 @@ input{
     border-radius: 10px;
 }
 
+#metaBox{
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+}
+
+#importBoxDiv{
+    grid-column: 1;
+    grid-row: 3;
+}
+
 #sheet{
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 10vh 95vh 30vh;
     // background-color: green;
-    // display: flex;
+    display: grid;
     // float: left;
     #auxCounter{
         width: 20vw;
@@ -123,20 +136,41 @@ input{
 }
 
 #charData{
-    width: 100vw;
+    width: 40vw;
     padding: 0px !important;
     margin: 0px !important;
     float: left;
     display: grid;
-    grid-template-columns: 33% 33% 33%;
-    grid-template-rows: 10vh 22.5vh 22.5vh 22.5vh 22.5vh;
-
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 1em;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 5vh 30vh 30vh 30vh 30vh;
+    // background-color: white;
+    // border-radius: 10px;
+    // outline: 2px solid black;
     .dataItem{
         p{
             width: 30%
         }
+        .input{
+            font-size: 0.9em;
+            width: 65%;
+            height: 100%;
+        }
         display: flex;
         width: 100%;
+        height: 3em;
+        margin-top: 20px;
+    }
+    .dataItemTitle{
+        p {
+                width: 30%
+            }
+        
+            display: flex;
+            width: 100%;
+            // margin-left: 20px;
     }
 
     .housing{
@@ -166,25 +200,27 @@ input{
         grid-row-start: 2;
     }
     #TechniquehouseDiv{
-        grid-column: 3;
-        grid-row-start: 2;
-    }
-    #KnowledgehouseDiv{
         grid-column: 1;
         grid-row-start: 3;
     }
-    #SpecialhouseDiv{
+    #KnowledgehouseDiv{
         grid-column: 2;
         grid-row-start: 3;
+    }
+    #SpecialhouseDiv{
+        grid-column: 1;
+        grid-row-start: 4;
     }
 
 }
 
 
 #stats{
+    grid-column: 1;
+    grid-row: 2;
     width: 55vw;
     height: 100vh;
-    background-color: blue;
+    // background-color: blue;
     .subGrid{
         width: 18vw;
         margin: 0px;
