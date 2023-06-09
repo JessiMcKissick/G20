@@ -1,7 +1,7 @@
-@font-face {
-    font-family: Canterbury;
-    src: url('/media/Canterbury.ttf');
-}
+// @font-face {
+//     font-family: Canterbury;
+//     src: url('/media/Canterbury.ttf');
+// }
 ::-webkit-scrollbar {
     width: 3px;
     // padding: 10px;
@@ -34,6 +34,17 @@ button{
     border: none;
     border-radius: 6px;
     padding: 1em;
+
+}
+
+.button:hover{
+    background-color: rgb(32, 32, 32);
+    color: white;
+}
+
+.button:active{
+    background-color: gold;
+    color: black;
 }
 
 input{
@@ -111,28 +122,109 @@ input{
 
 }
 
-.subGrid{
-    width: 32vw;
-    margin: 0px;
-    padding: 0px;
+#charData{
+    width: 100vw;
+    padding: 0px !important;
+    margin: 0px !important;
     float: left;
-    p{
-        padding-bottom: 0px !important;
-        margin-bottom: 0px !important;
-        margin-top: 5px !important;
-        font-size: 1.2em;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 10vh 22.5vh 22.5vh 22.5vh 22.5vh;
+
+    .dataItem{
+        p{
+            width: 30%
+        }
+        display: flex;
+        width: 100%;
     }
-    .seler{
-        padding-bottom: 0px !important;
-        margin-bottom: 0px !important;
-        background-color: rgba(0, 0, 0, 0.208);
-        color: black; 
-        font-size: 1em;
-        font-weight: bold;
-        border-radius: 6px;
-        border:none; 
-        padding-right: 10px;
-        margin-left: 10px;
+
+    .housing{
+        display: inline;
+        // width: 20%;
+        // padding: 20px;
+        // height: 100vh;
+        grid-column: 3;
+    }
+
+    #charTitle{
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    #rankDiv{
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    #OccupationhouseDiv{
+        grid-column: 1;
+        grid-row-start: 2;
+    }
+    #FeaturehouseDiv{
+        grid-column: 2;
+        grid-row-start: 2;
+    }
+    #TechniquehouseDiv{
+        grid-column: 3;
+        grid-row-start: 2;
+    }
+    #KnowledgehouseDiv{
+        grid-column: 1;
+        grid-row-start: 3;
+    }
+    #SpecialhouseDiv{
+        grid-column: 2;
+        grid-row-start: 3;
+    }
+
+}
+
+
+#stats{
+    width: 55vw;
+    height: 100vh;
+    background-color: blue;
+    .subGrid{
+        width: 18vw;
+        margin: 0px;
+        padding: 0px;
+        float: left;
+        div{
+            // width: 20%;
+            background-color: white;
+            height: 3.2vh;
+            margin-bottom: 1em;
+            margin-right: 0.5em;
+            // padding: 5px;
+            display: flex;
+        }
+        p{
+            margin-bottom: 0px !important;
+            margin-top: 5px !important;
+            font-size: 1em;
+            font-weight: bold;
+            width: 75%;
+            padding-left: 1em;
+        }
+        .seler{
+            padding-bottom: 0px !important;
+            margin-bottom: 0px !important;
+            padding: 0px;
+            margin: 0px;
+            // width: 100%s !important;
+            background-color: rgba(0, 0, 0, 0.208);
+            color: black; 
+            font-size: 1em;
+            font-weight: bold;
+            // border-radius: 6px;
+            border:none; 
+            // padding-right: 10px;
+            // margin-left: 10px;
+            float:left;
+            height: 100%;
+    
+        }
     }
 }
 

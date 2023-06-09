@@ -1,6 +1,6 @@
 let state = 0;
-let itemList = [
-    'Blades',
+
+const offenseList = ['Blades',
     'Bludgeons',
     'Unarmed',
     'Throwing',
@@ -10,13 +10,11 @@ let itemList = [
     'Gadgetry (Destruction)',
     'Gadgetry (Disruption)',
     'Summon',
-    'Pilot',
+    'presence']
 
-    'Fortitude', 'Clarity', 'Armor', 'Parry', 'Swiftness', 'Magic', 'Gadgetry', 'Summon', 'Pilot', 'Stealth',
-
-    'Performance', 'Magic', 'Gadgetry', 'Medicine', 'Summon', 'Perception (Physical)', 'Perception (Magical)',
-    'Perception (Insight)', 'Provisions', 'Science', 'Might', 'Sleight Of Hand'
-]
+const defenseList = ['Fortitude', 'Clarity', 'Armor', 'Parry', 'Swiftness', 'Magic', 'Gadgetry', 'Summon', 'Pilot', 'Stealth',]
+const supportList = ['Performance', 'Magic', 'Gadgetry', 'Medicine', 'Summon', 'Perception (Physical)', 'Perception (Magical)',
+    'Perception (Insight)', 'Provisions', 'Might', 'Sleight Of Hand']
 // Stat variables
 let auxCount = 30; // Base points
 var auxoff = 0;
@@ -82,6 +80,7 @@ function generateUI() {
 
     $hr(form, '', '');
     $d(form, 'contentGrid', 'stats'); let grid = pullID('stats');
+    $d(form, 'contentGrid', 'charData'); let charData = pullID('charData');
     $d(grid, 'subGrid', 'offenseGrid'); let ofGrid = pullID('offenseGrid');
     $d(grid, 'subGrid', 'defenseGrid'); let deGrid = pullID('defenseGrid');
     $d(grid, 'subGrid', 'supportGrid'); let suGrid = pullID('supportGrid');
@@ -162,11 +161,12 @@ function generateUI() {
     $b(pullID('sheet'), 'import', function () { importSheet() }, 'imp_exp_button', 'importButton');
 }
  
+// Item list has been replaced with offenselist defenselist and supportlist
 function proceduralUI(a, b, c, d) {
-    for (let i = 0; i < 11; i++) {
+    for (let i = 0; i < offenseList.length; i++) {
         console.log('A tick')
-        $d(a,'',itemList[i]+"Div"); let div = pullID(itemList[i]+"Div");
-        $p(div, itemList[i], '', itemList[(i)] + "Label");
+        $d(a,'',offenseList[i]+"Div"); let div = pullID(offenseList[i]+"Div");
+        $p(div, offenseList[i], '', offenseList[(i)] + "Label");
         $sel(div, 'seler', 'selerOf' + i); let ofSel = pullID('selerOf' + i);
         offSkillID.push(('selerOf' + i));
         for (let e = -2; e <= offPointMax; e++) {
@@ -177,10 +177,10 @@ function proceduralUI(a, b, c, d) {
         };
         pullID('selerOf' + i).value = 0;
     };
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < defenseList.length; i++) {
         console.log('B tick')
-        $d(b, '', itemList[(i + 11)] + "DefDiv"); let div = pullID(itemList[(i + 11)] + "DefDiv");
-        $p(div, itemList[(i + 11)], '', itemList[(i + 11)] + 'Label');
+        $d(b, '', defenseList[i] + "DefDiv"); let div = pullID(defenseList[i] + "DefDiv");
+        $p(div, defenseList[i], '', defenseList[i] + 'Label');
         $sel(div, 'seler', 'selerDe' + i); let deSel = pullID('selerDe' + i);
         defSkillID.push('selerDe' + i);
         for (let e = -2; e <= defPointMax; e++) {
@@ -192,14 +192,10 @@ function proceduralUI(a, b, c, d) {
         pullID('selerDe' + i).value = 0;
 
     };
-    for (let i = 0; i < 12; i++) {
-        $d(c, '', itemList[(i + 21)] + "SuDiv"); let div = pullID(itemList[(i + 21)] + "SuDiv");
-        $p(div, itemList[(i + 21)],'',itemList[(i+21)] + "Label");
+    for (let i = 0; i < supportList.length; i++) {
+        $d(c, '', supportList[i] + "SuDiv"); let div = pullID(supportList[i] + "SuDiv");
+        $p(div, supportList[i],'',supportList[i] + "Label");
         $sel(div, 'seler', 'selerSu' + i); let suSel = pullID('selerSu' + i);
-        if (itemList[(i + 21)] == "Science") {
-            $input(div, '', '', 'scienceType');
-            pullID('ScienceLabel').innerText = "Science (Specify)";
-        }
         supSkillID.push('selerSu' + i)
         pullID('selerSu' + i).onchange = function () {
             update('sup', ('selerSu' + i));
@@ -210,11 +206,54 @@ function proceduralUI(a, b, c, d) {
             $opt(suSel, e, '', '');
         }
     };
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < supportList.length; i++) {
         pullID('selerSu' + i).value = 0;    
     }
+    generate_charData();
 }
 
+let charDatList = [
+    'Title','Occupation','Rank','Feature', 'Knowledge', 'Technique', 'Special'
+]
+let ranks = ['Trash Panda', 'Ally', 'Initiate', 'Guardian', 'Vigilant', 'Archon', 'Grand Archon']
+///////////////////////////////////////////////////////////////////////////////
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
+///////////////////////////////////////////////////////////////////////////////
+// TODO: Add description boxes for feats and techs
+// https://docs.google.com/spreadsheets/d/1hL9rfueX2loDDZCIXVAtHse99B1qGYX2xGjpqIlddbo/edit?pli=1#gid=0
+
+
+function generate_charData(){ // Current project !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    let charData = pullID('charData');
+    for(let i = 0; i < charDatList.length; i++){
+        if(charDatList[i] == 'Occupation' || charDatList[i] == 'Feature' || charDatList[i] == 'Knowledge' || charDatList[i] == 'Technique' || charDatList[i] == 'Special'){
+            $d(charData,'housing',charDatList[i] + 'houseDiv'); let newDiv = pullID(charDatList[i] + 'houseDiv');
+            for(let e = 0; e < 3; e++){
+                $d(newDiv,'dataItem', (charDatList[i]) + e); let item = pullID(charDatList[i] + e);
+                $input(item,'','input',charDatList[i] + e,'','',charDatList[i] + ' ' + (e+1) + ":");
+            }
+        }
+
+        if(charDatList[i] == 'Rank'){ //TODO: Populate rank
+            $d(charData, 'dataItem', 'rankDiv'); let item = pullID('rankDiv');
+            $p(item, 'Rank: ','label');
+            $sel(item,'','rankSel'); let selector = pullID('rankSel');
+            for(let n = 0; n < ranks.length; n++){
+                $opt(selector,ranks[n]);
+            }
+            selector.value = 'Guardian';
+
+        }
+
+        if(charDatList[i] == 'Title'){
+            $d(charData, 'dataItem', 'charTitle'); let item = pullID('charTitle');
+            $input(item, '', 'input', 'Title','','','Title:'); 
+
+        }
+
+    }
+
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Save and load functionality
@@ -237,7 +276,9 @@ function load(data){
         $sel(sheet, '', 'profileSelector'); let prof = pullID('profileSelector');
         for (let i = 0; i < localStorage.length; i++) {
             let targetObject = JSON.parse(localStorage.getItem('sheet' + i));
-            $opt(prof, targetObject.name, '');
+            if(targetObject.name != undefined){
+                $opt(prof, targetObject.name, '');
+            }
         }
         prof.onchange = function () { load(true) }
     }
@@ -249,6 +290,7 @@ function load(data){
     } else {
         for(let i = 0; i<localStorage.length; i++){
             let tar = JSON.parse(localStorage.getItem('sheet' + i));
+            console.log(tar)
             if(tar.name == prof.value){
                 current = tar;
             }
@@ -268,9 +310,7 @@ function loadState(state) {
     let offenseNegative = state.offenseNegative;
     let supportNegative = state.supportNegative;
     let auxData = state.auxPoints;
-    let scienceType = state.scienceType;
 
-    pullID('scienceType').value = scienceType;
     pullID('offenseNegCounter').value = -Math.abs(offenseNegative);
     pullID('defenseNegCounter').value = -Math.abs(defenseNegative);
     pullID('supportNegCounter').value = -Math.abs(supportNegative);
@@ -331,21 +371,20 @@ function generateObject() {
     var off = [];
     var def = [];
     var sup = [];
-    let scienceType = pullID('scienceType').value;
     saveObj.name = pullID('charName').value;
     saveObj.hp = pullID('charHP').value;
     saveObj.armor = pullID('charArmor').value;
 
 
-    for (let i = 0; i < 11; i++) {
+    for (let i = 0; i < offenseList.length; i++) {
         let state = pullID('selerOf' + [i]).value;
         off.push(state);
     }
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < defenseList.length; i++) {
         let state = pullID('selerDe' + [i]).value;
         def.push(state);
     }
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < supportList.length; i++) {
         let state = pullID('selerSu' + [i]).value;
         sup.push(state);
     }
@@ -357,7 +396,6 @@ function generateObject() {
     saveObj.offenseNegative = offNeg;
     saveObj.supportNegative = supNeg;
     saveObj.auxData = auxPoints;
-    saveObj.scienceType = scienceType;
     return saveObj;
 
 }
