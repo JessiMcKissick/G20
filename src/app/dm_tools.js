@@ -36,9 +36,12 @@ function playerGen() {
     $input(player, '', 'playerArmor', '', '', '', 'Armor');
     $input(player, '', 'playerDamage', '', '', '', 'Damage taken');
     $input(player, '', 'playerArmorDamage', '', '', '', 'Armor damage taken');
+    $input(player, '', 'playerCurrentTp', '', '', '', 'TP Available');
     // $input(player, '', 'playerName', '', '', '', 'Feats');
     $area(player, '', 'playerFeats', '', 'Feats');
-    pc_count += 1;
+    $area(player, '', 'playerTechs', '', 'Techs');
+
+    pc_count += 1;  
 }
 
 function npcGen() {
@@ -46,7 +49,9 @@ function npcGen() {
     $d(con, 'enemyDiv', 'enemy' + en_count); let enemy = pullID('enemy' + en_count);
     $h(3, enemy, 'Enemy ' + (en_count + 1));
     $input(enemy, '', 'enemyName', '', '', '', 'Name');
+    $input(enemy, '', 'enemyMarker', '', '', '', 'Marker');
     $input(enemy, '', 'enemyHP', '', '', '', 'HP (base)');
+    $input(enemy, '', 'enemyHPCurrent', '', '', '', 'HP (current)');
     $input(enemy, '', 'enemySpeed', '', '', '', 'Speed');
     $area(enemy, '', 'enemyFeats', '', 'Feats and abilities');
 
