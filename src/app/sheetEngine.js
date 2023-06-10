@@ -157,10 +157,10 @@ function generateUI() {
     $h(3, ofGrid, 'Offense Points: ' + offPoints, 'pointCount', 'offPointCounter');
     $h(3, suGrid, 'Support Points: ' + supPoints, 'pointCount', 'supPointCounter');
     $hr(form)
-    // $d(pullID('sheet'),'','importBoxDiv'); let impbox = pullID('importBoxDiv');
-    // $b(impbox, 'Export', function () { exportSheet() }, 'imp_exp_button', 'exportButton');
-    // $input(impbox, '', '', 'importBox', '', '', 'Import sheet');
-    // $b(impbox, 'import', function () { importSheet() }, 'imp_exp_button', 'importButton');
+    $d(pullID('sheet'),'','importBoxDiv'); let impbox = pullID('importBoxDiv');
+    $b(impbox, 'Export', function () { exportSheet() }, 'imp_exp_button', 'exportButton');
+    $input(impbox, '', '', 'importBox', '', '', 'Import sheet');
+    $b(impbox, 'import', function () { importSheet() }, 'imp_exp_button', 'importButton');
 }
  
 // Item list has been replaced with offenselist defenselist and supportlist
@@ -379,13 +379,14 @@ function loadState(state) {
 /////////////////////////////////////////////////////
 function exportSheet() {
     let sheet = generateObject();
-    let target = pullID('sheet');
-    try{
-        pullID('exportString').remove();
-    } catch {
+    // let target = pullID('sheet');
+    // try{
+    //     pullID('exportString').remove();
+    // } catch {
 
-    }
-    $p(target, JSON.stringify(sheet),'','exportString');
+    // }
+    alert("Success! Please copy: " + JSON.stringify(sheet))
+    // $p(target, JSON.stringify(sheet),'','exportString');
 
 }
 
