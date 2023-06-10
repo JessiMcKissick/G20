@@ -157,7 +157,9 @@ function generateUI() {
     $h(3, ofGrid, 'Offense Points: ' + offPoints, 'pointCount', 'offPointCounter');
     $h(3, suGrid, 'Support Points: ' + supPoints, 'pointCount', 'supPointCounter');
     $hr(form)
-    $d(pullID('sheet'),'','importBoxDiv'); let impbox = pullID('importBoxDiv');
+    // Don't ask me why when this section is the child of con its fine but form it breaks the router
+    // I have no answers only confusion
+    $d(con,'','importBoxDiv'); let impbox = pullID('importBoxDiv');
     $b(impbox, 'Export', function () { exportSheet() }, 'imp_exp_button', 'exportButton');
     $input(impbox, '', '', 'importBox', '', '', 'Import sheet');
     $b(impbox, 'import', function () { importSheet() }, 'imp_exp_button', 'importButton');
@@ -391,9 +393,14 @@ function exportSheet() {
 }
 
 function importSheet(){
-    let data = pullID('importBox').value;
-    console.log(data);
-    load(JSON.parse(data));
+    try{
+        let data = pullID('importBox').value;
+        // console.log(data);
+        load(JSON.parse(data));
+        alert('Import successful!');
+    } catch (err){
+        alert('Import failed! Error:' + err.message)
+    }
 }
 
 // End import/Export////////////////////////////////

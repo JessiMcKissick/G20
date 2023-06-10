@@ -83,18 +83,26 @@ input {
   color: #00000000;
   visibility: hidden;
 }
-#sheet .imp_exp_button {
-  padding: 0px;
-  padding-right: 5px;
-  padding-left: 5px;
-}
-#sheet #importButton {
+
+#exportButton {
+  width: 10em;
+  height: 2em;
   background-color: green;
   color: white;
 }
-#sheet #exportButton {
-  background-color: red;
+
+#importButton {
+  background-color: blue;
   color: white;
+}
+
+.imp_exp_button {
+  padding: 0px;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-left: 10px;
+  width: 5em;
+  height: 2em;
 }
 
 #scienceType {

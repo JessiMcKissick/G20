@@ -8,7 +8,7 @@ function header(){
     let navi = pullID('headNav');
     ////////////////////////////////
     
-    $h(1,logo,'G20 Tools (Beta 2.4)','','headTitle');
+    $h(1,logo,'G20 Tools (Beta 2.4.1)','','headTitle');
     // $b(hdr, 'Go back', function () { router(prevPage) }, '', '');
     // $b(hdr, 'Go home', function () { router('home()') }, '', '');
     $b(hdr, 'Go home', function () { location.reload() }, 'button', '');
