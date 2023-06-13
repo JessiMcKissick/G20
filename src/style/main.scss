@@ -17,14 +17,28 @@
     background: #000000;
     border: 1px solid rgb(255, 255, 255);
 }
+
+@font-face{
+    font-family: exo;
+    src:url('/media/Exo-VariableFont_wght.ttf');
+}
+@font-face {
+    font-family: montesserat;
+    src: url('/media/Montserrat-VariableFont_wght.ttf');
+}
+
 body{
-    background-image: url("/media/bg_image.jpg");
+    // background-image: url("/media/bg_image.jpg");
+background: rgb(237, 231, 145);
+    background: radial-gradient(circle, rgba(237, 231, 145, 1) 0%, rgba(226, 226, 226, 1) 100%);
     background-attachment: fixed;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: exo;
+
     // width: 100vw;
     overflow-x: hidden;
     padding: 0px;
     margin: 0.4em;
+
 }
 
  
@@ -156,12 +170,17 @@ input{
 
     }
     #charnameBox{
+        font-weight: bold;
         width: 20vw;
         float: left;
         padding-right: 0.5em;
     }
+    #charName{
+                    font-family: montesserat;
+    }
     #hpBox{
         width: 5em;
+        font-weight: bold;
         text-align: center;
         float: left;
         #charHP{
@@ -170,6 +189,7 @@ input{
         }
     }
     #armorBox{
+        font-weight: bold;
         width: 5em;
         text-align: center;
         float: left;
@@ -240,6 +260,10 @@ input{
 
 }
 
+.inputlabel{ 
+    font-weight: bold;
+}
+
 #charData{
     // width: 40vw;
     padding: 0px !important;
@@ -255,15 +279,54 @@ input{
     // background-color: white;
     // border-radius: 10px;
     // outline: 2px solid black;
+    .dataItemSpec{
+        p {
+                text-align: center;
+                // width: 30%; 
+                color: white;
+                // padding-left: 0.4em;
+                padding-top: 0.2em;
+                margin: 0px;
+                padding-top: none !important;
+                padding-bottom: none !important;
+                margin: none !important;
+                grid-column: 1;
+                grid-row: 1;
+                height: 1em;
+            }
+        .KnowledgeClass{
+            width: 95%;
+            // padding: 4px;
+            margin: 0.2em;
+                        font-family: montesserat;
+        }
+        .OccupationClass{
+            width: 95%;
+            // padding: 4px;
+            margin: 0.2em;
+                        font-family: montesserat;
+        }
+                // background-color: rgb(52, 168, 83);    
+    }
     .dataItem{
         p{
-            width: 30%; 
+            text-align: center;
+            // width: 30%; 
             color: white;
-            padding-left: 10px;
+            // padding-left: 0.4em;
+            padding-top: 0.2em;
+            margin: 0px;
+            padding-top: none !important;
+            padding-bottom: none !important;
+            margin: none !important;
+            grid-column: 1;
+            grid-row: 1;
+            height: 1em;    
+
         }
         .input{
             font-size: 0.9em;
-            width: 65%;
+            // width: 65%;
             background-color: white; 
             color: black;
             appearance: none;
@@ -271,11 +334,40 @@ input{
             resize: none;
             border-radius: 10px;
             // height: 100%;
+            grid-column: 2;
+            grid-row-start: 1 !important;
+            grid-row-end: span 3 !important;
+            font-family: montesserat;
         }
-        display: flex;
+        // .inputprelabel{
+        //     grid-column: 1;
+        //     grid-row: 1;
+        //     height: 1em;
+        // }
+        .inputpre{
+            grid-column: 1;
+            grid-row: 1;
+            text-align: center;
+            font-family: montesserat;
+        }
+        .OccupationClass{
+            grid-column-start: 1;
+            grid-column-end:span 2;
+            grid-row-start: 1;
+            grid-row-end: span 3;
+        }
+        .KnowledgeClass{
+            grid-column-start: 1;
+            grid-column-end: span 2;
+            grid-row-start: 1;
+            grid-row-end: span 3;
+        }
+        display: grid;
+        grid-template-columns: 30% 70%;
+        grid-template-rows: 50% 25% 25%;
         // width: 100%;
         height: 3.7em;
-        margin-top: 8px;
+        margin-top: 0.3em;
         background-color: rgb(52, 168, 83);
         border-right: 3px solid white;
         border-radius: 10px;
@@ -296,6 +388,10 @@ input{
         // padding: 20px;
         // height: 100vh;
         grid-column: 3;
+        .housingTitle{
+            padding: 0px;
+            margin:  0px;
+        }
     }
 
     #charTitle{
@@ -309,11 +405,12 @@ input{
     }
 
     #OccupationhouseDiv{
-        grid-column: 1;
+        grid-column: 2;
         grid-row-start: 2;
     }
+
     #FeaturehouseDiv{
-        grid-column: 2;
+        grid-column: 1;
         grid-row-start: 2;
     }
     #TechniquehouseDiv{
@@ -322,7 +419,7 @@ input{
     }
     #KnowledgehouseDiv{
         grid-column: 2;
-        grid-row-start: 3;
+        grid-row-start: 2;
     }
     #SpecialhouseDiv{
         grid-column: 1;
@@ -331,6 +428,9 @@ input{
 
 }
 
+.label{
+    font-weight: bold;
+}
 
 #stats{
     grid-column: 1;
@@ -341,12 +441,15 @@ input{
 
     .offenseSub{
         background-color: rgb(166, 28, 0);
+                    font-family: exo;
     }
     .defenseSub{
         background-color: rgb(60, 120, 216);
+                            font-family: exo;
     }
     .supportSub{
         background-color: rgb(241, 194, 50);
+                            font-family: exo;
     }
 
 

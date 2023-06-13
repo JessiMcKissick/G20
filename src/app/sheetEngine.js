@@ -12,11 +12,11 @@ const offenseList = ['Blades',
     'Gadgetry (Destruction)',
     'Gadgetry (Disruption)',
     'Summon',
-    'presence']
+    'Presence']
 
-const defenseList = ['Fortitude', 'Clarity', 'Armor', 'Parry', 'Swiftness', 'Magic', 'Gadgetry', 'Summon', 'Pilot', 'Stealth',]
-const supportList = ['Performance', 'Magic', 'Gadgetry', 'Medicine', 'Summon', 'Perception (Physical)', 'Perception (Magical)',
-    'Perception (Insight)', 'Provisions', 'Might', 'Sleight Of Hand']
+const defenseList = ['Fortitude', 'Clarity', 'Armor', 'Parry', 'Swiftness', 'Stealth', 'Magic', 'Gadgetry', 'Pilot', 'Summon',]
+
+const supportList = ['Might', 'Perception (Physical)', 'Perception (Magical)', 'Perception(Insight)', 'Sleight of Hand', 'Medicine', 'Magic', 'Gadgetry', 'Provisions', 'Summon', 'Performance']
 // Stat variables
 let auxCount = 30; // Base points
 var auxoff = 0;
@@ -220,13 +220,29 @@ let ranks = ['Trash Panda', 'Ally', 'Initiate', 'Guardian', 'Vigilant', 'Archon'
 function generate_charData(){ // Current project !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     let charData = pullID('charData');
     for(let i = 0; i < charDatList.length; i++){
-        if(charDatList[i] == 'Occupation' || charDatList[i] == 'Feature' || charDatList[i] == 'Knowledge' || charDatList[i] == 'Technique' || charDatList[i] == 'Special'){
+        if(charDatList[i] == 'Feature' || charDatList[i] == 'Technique' || charDatList[i] == 'Special'){
             $d(charData,'housing',charDatList[i] + 'houseDiv'); let newDiv = pullID(charDatList[i] + 'houseDiv');
+            $h(3,newDiv,charDatList[i],'housingTitle',charDatList[i]+'housingTitle');
             for(let e = 0; e < 3; e++){
                 $d(newDiv,'dataItem', (charDatList[i]) + e + 'div'); let item = pullID(charDatList[i] + e + 'div');
-                $area(item, '', 'input', charDatList[i] + e, charDatList[i] + ' ' + (e + 1) + ":")
+                $area(item, '', 'input', charDatList[i] + e, charDatList[i] + ' ' + (e + 1),true);
                 pullID(charDatList[i] + e).oninput = function(){wordCount(charDatList[i] + e, 20);}
             }
+        }
+        if(charDatList[i] == 'Occupation'){}
+        if(charDatList[i] == 'Knowledge'){
+            $d(charData, 'housing', charDatList[i] + 'houseDiv'); let newDiv = pullID(charDatList[i] + 'houseDiv');
+            $h(3, newDiv, charDatList[i], 'housingTitle', charDatList[i] + 'housingTitle');
+            for(let e = 0; e < 3; e++){
+                $d(newDiv, 'dataItemSpec', (charDatList[i]) + e + 'div'); let item = pullID(charDatList[i] + e + 'div');
+                $input(item,'',charDatList[i]+'Class',charDatList[i]+e,'',charDatList[i]+e,'','',true);
+            }
+            $h(3, newDiv, 'Occupation', 'housingTitle', 'Occupation' + 'housingTitle');
+            for (let e = 0; e < 3; e++) {
+                $d(newDiv, 'dataItemSpec', 'Occupation' + e + 'div'); let item = pullID('Occupation' + e + 'div');
+                $input(item, '', 'Occupation' + 'Class', 'Occupation' + e, '', 'Occupation' + e, '', '',true);
+            } 
+
         }
 
         if(charDatList[i] == 'Rank'){ //TODO: Populate rank

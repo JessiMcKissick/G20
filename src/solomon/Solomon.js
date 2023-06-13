@@ -142,8 +142,11 @@ let $form = (t,cn,id,action,method,name) => {
     $g(t,"form","",id,cn,"",action,method,name);
 }
 
-let $input = (t,c,cn,id,type,name,label,isEnabled) => {
-    $p(t,label,cn + 'label',id + 'label');
+let $input = (t,c,cn,id,type,name,label,isEnabled,isPre) => {
+    if(!isPre){
+        $p(t,label,cn + 'label',id + 'label');    
+
+    }
     $g(t,"input",c,id,cn,"",type,name,isEnabled);
 }
 
@@ -151,8 +154,13 @@ let $b = (t,c,oc,cn,id) => {
     $g(t, "button", c, id, cn, oc);
 };
 
-let $area = (t, c, cn, id, label) => {
-    $p(t, label, cn + 'label', id + 'label');
+let $area = (t, c, cn, id, label, isDual) => {
+    if(isDual == undefined || isDual == ''){
+        $p(t, label, cn + 'label', id + 'label');
+
+    } else {
+        $input(t,c+'pre',cn+'pre',id+'pre','','     ',label, '', true);
+    }
     $g(t, "textarea", c, id, cn, "");
 }
 
