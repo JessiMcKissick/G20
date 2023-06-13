@@ -128,7 +128,7 @@ input {
 
 #sheet {
   grid-template-columns: 40% 60%;
-  grid-template-rows: 10vh 95vh 30vh;
+  grid-template-rows: 10vh 95vh;
   display: grid;
 }
 #sheet #auxCounter {
@@ -165,6 +165,12 @@ input {
   margin-top: 1em;
   color: #00000000;
   visibility: hidden;
+}
+
+#toolBox {
+  border-top: 1px solid black;
+  margin-top: 10px;
+  padding-top: 10px;
 }
 
 #exportButton {

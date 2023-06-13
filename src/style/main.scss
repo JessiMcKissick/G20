@@ -143,7 +143,7 @@ input{
 
 #sheet{
     grid-template-columns: 40% 60%;
-    grid-template-rows: 10vh 95vh 30vh;
+    grid-template-rows: 10vh 95vh;
     // background-color: green;
     display: grid;
     // float: left;
@@ -186,6 +186,13 @@ input{
     }
  
 }
+
+#toolBox{
+    border-top: 1px solid black;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
 #exportButton{
     width: 10em;
     height: 2em;

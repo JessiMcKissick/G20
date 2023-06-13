@@ -140,6 +140,19 @@ function generateUI() {
     $b(impbox, 'Export', function () { exportSheet() }, 'imp_exp_button', 'exportButton');
     $input(impbox, '', '', 'importBox', '', '', 'Import sheet');
     $b(impbox, 'import', function () { importSheet() }, 'imp_exp_button', 'importButton');
+
+    $d(con,'','toolBox'); let toolBox = pullID('toolBox');
+    $h(1,toolBox,'Toolbox','','tbTitle');
+    $d(toolBox,'','noteBoxDiv'); let noteDiv = pullID('noteBoxDiv');
+    $area(noteDiv,'notes','','noteBox','Notes');
+
+    $d(toolBox, '', 'buffBoxDiv'); let buffDiv = pullID('buffBoxDiv');
+    $area(buffDiv, 'buffs', '', 'buffBox', 'Buffs');
+
+    $d(toolBox, '', 'debuffBoxDiv'); let debuffDiv = pullID('debuffBoxDiv');
+    $area(debuffDiv, 'debuffs', '', 'debuffBox', 'Debuffs');
+    $input(debuffDiv, 'debuffHP', '', 'debuffHPInp', 'HP debuff');
+    $input(debuffDiv, 'debuffarm', '', 'debuffARInp', 'Armor debuff');
 }
  
 // Item list has been replaced with offenselist defenselist and supportlist
@@ -202,6 +215,7 @@ let ranks = ['Trash Panda', 'Ally', 'Initiate', 'Guardian', 'Vigilant', 'Archon'
 ///////////////////////////////////////////////////////////////////////////////
 
 
+/////HERE POTATO
 
 function generate_charData(){ // Current project !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     let charData = pullID('charData');
@@ -211,7 +225,7 @@ function generate_charData(){ // Current project !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             for(let e = 0; e < 3; e++){
                 $d(newDiv,'dataItem', (charDatList[i]) + e + 'div'); let item = pullID(charDatList[i] + e + 'div');
                 $area(item, '', 'input', charDatList[i] + e, charDatList[i] + ' ' + (e + 1) + ":")
-
+                pullID(charDatList[i] + e).oninput = function(){wordCount(charDatList[i] + e, 20);}
             }
         }
 
@@ -607,3 +621,25 @@ let updateAssist = (type) => { // This does the work of checking each box's valu
 }
 //////end of update functions///////////////
 ////////////////////////////////////////////
+
+function wordCount(target, limit){
+    let tar = pullID(target);
+    let data = tar.value;
+    let countBox = []
+    countBox = data.split(' ');
+    let count = countBox.length
+    if(count > limit){
+        while(count > limit){
+            countBox.pop();
+            count = countBox.length;
+        }
+        let stringy = '';
+        for(let i = 0; i<count;i++){
+            stringy += countBox[i] + ' ';
+        }
+        tar.value = stringy;
+        return true;
+    } else {
+        return false;
+    }
+}
