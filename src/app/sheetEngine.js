@@ -71,15 +71,58 @@ function generateUI() {
     $form(con, '', 'sheet')
     let form = pullID('sheet');
     $d(form,'','metaBox'); let meta = pullID('metaBox');
-    $h(3, meta, 'Auxilary points: ' + auxCount, '', 'auxCounter');
-    $d(meta, '', 'charnameBox'); let charBox = pullID('charnameBox');
+    $d(meta,'','statBox'); let sBox = pullID('statBox');
+    $d(sBox, '', 'charnameBox'); let charBox = pullID('charnameBox');
     $input(charBox, 'Name', 'sheetData', 'charName', 'text', 'sheetName', 'Character Name', '');
-    $d(meta, '', 'hpBox'); let hpBox = pullID('hpBox');
+    $d(sBox, '', 'hpBox'); let hpBox = pullID('hpBox');
     $input(hpBox, 'HP', 'sheetData', 'charHP', 'text', 'sheetHP', 'HP', 'true');
-    $d(meta,'','armorBox'); let armorBox = pullID('armorBox');
+    $d(sBox,'','armorBox'); let armorBox = pullID('armorBox');
     $input(armorBox, 'Armor', 'sheetData', 'charArmor', 'text', 'sheetArm', 'Armor', 'true');
 
-    $hr(form, '', '');
+    $d(meta,'','damBox'); let damBox = pullID('damBox');
+    $p(damBox,'Damage','labelImportant','');
+    $d(damBox,'microCon','hpDamBox'); let hpDamBox = pullID('hpDamBox');
+    $input(hpDamBox, 'HP Damage', '', 'hpDam', 'text', 'sheetDam', 'HP');
+    $d(damBox, 'microCon', 'arDamBox'); let arDamBox = pullID('arDamBox');
+    $input(arDamBox, 'Armor Damage', '', 'arDam', 'text', 'sheetArDam', 'Armor');
+
+    pullID('hpDamBox').onchange = function(){
+        update('def');
+        console.log('spork')
+    }
+
+    pullID('arDamBox').onchange = function () {
+        update('def');
+        console.log('spork')
+    }
+
+    pullID('hpDamBox').onblur = function () {
+        update('def');
+        console.log('spork')
+    }
+
+    pullID('arDamBox').onblur = function () {
+        update('def');
+        console.log('spork')
+    }
+
+
+    $d(meta,'','tpContainer'); let tpContainer = pullID('tpContainer');
+    $p(tpContainer,'TP','labelImportant','tpContainerLabel');
+    $d(tpContainer, 'microCon', 'tpSubConMax'); let tpSubConMax = pullID('tpSubConMax');
+    $input(tpSubConMax, 'TP Max', '', 'tpMax', 'text', 'tpMax', 'Max', '');
+    $d(tpContainer, 'microCon', 'tpSubConCur'); let tpSubConCur = pullID('tpSubConCur');
+    $input(tpSubConCur, 'TP Current', '', 'tpCur', 'text', 'tpCurrent', 'Current', '');
+    val('tpCur', 3);
+    val('tpMax', 3);
+
+    $d(meta,'','determinationDiv'); let detDiv = pullID('determinationDiv');
+    $input(detDiv,'Determination','','determinCount','text','Determination','Determination');
+
+
+    $h(3, meta, 'Auxilary points: ' + auxCount, '', 'auxCounter');
+
+    // $hr(form,'','hRule');
     $d(form, 'contentGrid', 'stats'); let grid = pullID('stats');
     $d(form, 'contentGrid', 'charData'); let charData = pullID('charData');
     $d(grid, 'subGrid', 'offenseGrid'); let ofGrid = pullID('offenseGrid');
@@ -153,9 +196,9 @@ function generateUI() {
     //     console.log(defNeg);
     //     update('sup');
     // }
-    $h(3, deGrid, 'Defense Points: ' + defPoints, 'pointCount', 'defPointCounter');
-    $h(3, ofGrid, 'Offense Points: ' + offPoints, 'pointCount', 'offPointCounter');
-    $h(3, suGrid, 'Support Points: ' + supPoints, 'pointCount', 'supPointCounter');
+    $h(3, deGrid, 'Defense : ' + defPoints, 'pointCount', 'defPointCounter');
+    $h(3, ofGrid, 'Offense : ' + offPoints, 'pointCount', 'offPointCounter');
+    $h(3, suGrid, 'Support : ' + supPoints, 'pointCount', 'supPointCounter');
     $hr(form)
     // Don't ask me why when this section is the child of con its fine but form it breaks the router
     // I have no answers only confusion
@@ -169,8 +212,8 @@ function generateUI() {
 function proceduralUI(a, b, c, d) {
     for (let i = 0; i < offenseList.length; i++) {
         console.log('A tick')
-        $d(a,'',offenseList[i]+"Div"); let div = pullID(offenseList[i]+"Div");
-        $p(div, offenseList[i], '', offenseList[(i)] + "Label");
+        $d(a,'offenseSub',offenseList[i]+"Div"); let div = pullID(offenseList[i]+"Div");
+        $p(div, offenseList[i], 'statListItem', offenseList[(i)] + "Label");
         $sel(div, 'seler', 'selerOf' + i); let ofSel = pullID('selerOf' + i);
         offSkillID.push(('selerOf' + i));
         for (let e = 0; e <= offPointMax; e++) {
@@ -183,8 +226,8 @@ function proceduralUI(a, b, c, d) {
     };
     for (let i = 0; i < defenseList.length; i++) {
         console.log('B tick')
-        $d(b, '', defenseList[i] + "DefDiv"); let div = pullID(defenseList[i] + "DefDiv");
-        $p(div, defenseList[i], '', defenseList[i] + 'Label');
+        $d(b, 'defenseSub', defenseList[i] + "DefDiv"); let div = pullID(defenseList[i] + "DefDiv");
+        $p(div, defenseList[i], 'statListItem', defenseList[i] + 'Label');
         $sel(div, 'seler', 'selerDe' + i); let deSel = pullID('selerDe' + i);
         defSkillID.push('selerDe' + i);
         for (let e = 0; e <= defPointMax; e++) {
@@ -197,8 +240,8 @@ function proceduralUI(a, b, c, d) {
 
     };
     for (let i = 0; i < supportList.length; i++) {
-        $d(c, '', supportList[i] + "SuDiv"); let div = pullID(supportList[i] + "SuDiv");
-        $p(div, supportList[i],'',supportList[i] + "Label");
+        $d(c, 'supportSub', supportList[i] + "SuDiv"); let div = pullID(supportList[i] + "SuDiv");
+        $p(div, supportList[i],'statListItem',supportList[i] + "Label");
         $sel(div, 'seler', 'selerSu' + i); let suSel = pullID('selerSu' + i);
         supSkillID.push('selerSu' + i)
         pullID('selerSu' + i).onchange = function () {
@@ -329,6 +372,17 @@ function loadState(state) {
     let technique = state.technique;
     let knowledge = state.knowledge;
     let special = state.special;
+    let hpDam = state.hpDam;
+    let arDam = state.arDam;
+    let tpMax = state.tpMax;
+    let tpCur = state.tpCur;
+    let determination = state.determination;
+
+    val('hpDam', hpDam);
+    val('arDam', arDam);
+    val('tpMax',tpMax);
+    val('tpCur', tpCur);
+    val('determinCount', determination);
 
     // pullID('offenseNegCounter').value = -Math.abs(offenseNegative);
     // pullID('defenseNegCounter').value = -Math.abs(defenseNegative);
@@ -367,6 +421,7 @@ function loadState(state) {
     }
     pullID('Title').value = state.title;
     pullID('rankSel').value = state.rank;
+
 
     update('off');
     update('def');
@@ -421,11 +476,6 @@ function generateObject() {
     var technique = [];
     var knowledge = [];
     var special = [];
-    saveObj.name = pullID('charName').value;
-    saveObj.hp = pullID('charHP').value;
-    saveObj.armor = pullID('charArmor').value;
-    saveObj.title = pullID('Title').value;
-    saveObj.rank = pullID('rankSel').value;
 
     for (let i = 0; i < offenseList.length; i++) {
         let state = pullID('selerOf' + [i]).value;
@@ -459,6 +509,18 @@ function generateObject() {
         let state = pullID('Special' + i).value;
         special.push(state);
     }
+
+    saveObj.name = pullID('charName').value;
+    saveObj.hp = pullID('charHP').value;
+    saveObj.armor = pullID('charArmor').value;
+    saveObj.title = pullID('Title').value;
+    saveObj.rank = pullID('rankSel').value;
+    saveObj.hpDam = pullID('hpDam').value;
+    saveObj.arDam = pullID('arDam').value;
+    saveObj.tpMax = pullID('tpMax').value;
+    saveObj.tpCur = pullID('tpCur').value;
+    saveObj.determination = pullID('determinCount').value;
+
     saveObj.occupation = occupation;
     saveObj.feature = feature;
     saveObj.technique = technique;
@@ -498,13 +560,14 @@ function update(type) { // Main sheet update function
 }
 
 function updateData() { // Updates all state-specific text
-    val('charHP', Math.floor((val('selerDe0') / 2) + 5));
-    if(pullID('selerDe2').value < 0){
-        val('charArmor', 0);
+    val('charHP', (Math.floor((val('selerDe0') / 2) + 5) - pullID('hpDam').value).toString());
+    if(val('arDam') > 0){
+        val('charArmor', (val('selerDe2') - pullID('arDam').value).toString());
     } else {
-        val('charArmor', val('selerDe2'));
+        val('charArmor', (val('selerDe2')).toString());
 
     }
+
 };
 
 let updateAssist = (type) => { // This does the work of checking each box's value
@@ -581,13 +644,13 @@ let updateAssist = (type) => { // This does the work of checking each box's valu
         typePoints = 0; // This sets the available points in a category to the base - the amount used
         // poinTexBase.innerText = 'Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
         if (type == 'off') {
-            poinTexBase.innerText = 'Offense Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
+            poinTexBase.innerText = 'Offense : ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
 
         } else if (type == 'def') {
-            poinTexBase.innerText = 'Defense Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
+            poinTexBase.innerText = 'Defense : ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
 
         } else if (type == 'sup') {
-            poinTexBase.innerText = 'Support Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
+            poinTexBase.innerText = 'Support : ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
 
         }
         pullID('auxCounter').innerText = 'Auxilary points: ' + auxPoints;
@@ -606,28 +669,28 @@ let updateAssist = (type) => { // This does the work of checking each box's valu
         // poinTexBase.innerText = 'Points: ' + typePoints; // This sets the text for the category
         if (type == 'off') {
             if(typePoints > 15){
-                poinTexBase.innerText = 'Offense Points: ' + 15; // This sets the text for the category        // Check how many points below 0 are being used
+                poinTexBase.innerText = 'Offense : ' + 15; // This sets the text for the category        // Check how many points below 0 are being used
 
             } else {
-                poinTexBase.innerText = 'Offense Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
+                poinTexBase.innerText = 'Offense : ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
 
             }
 
         } else if (type == 'def') {
             if (typePoints > 15) {
-                poinTexBase.innerText = 'Defense Points: ' + 15; // This sets the text for the category        // Check how many points below 0 are being used
+                poinTexBase.innerText = 'Defense : ' + 15; // This sets the text for the category        // Check how many points below 0 are being used
 
             } else {
-                poinTexBase.innerText = 'Defense Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
+                poinTexBase.innerText = 'Defense : ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
 
             }
 
         } else if (type == 'sup') {
             if (typePoints > 15) {
-                poinTexBase.innerText = 'Support Points: ' + 15; // This sets the text for the category        // Check how many points below 0 are being used
+                poinTexBase.innerText = 'Support : ' + 15; // This sets the text for the category        // Check how many points below 0 are being used
 
             } else {
-                poinTexBase.innerText = 'Support Points: ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
+                poinTexBase.innerText = 'Support : ' + typePoints; // This sets the text for the category        // Check how many points below 0 are being used
 
             }
 

@@ -16,7 +16,7 @@
 body {
   background-image: url("/media/bg_image.jpg");
   background-attachment: fixed;
-  font-family: Canterbury;
+  font-family: Helvetica, Arial, sans-serif;
   overflow-x: hidden;
   padding: 0px;
   margin: 0.4em;
@@ -44,10 +44,75 @@ input {
   border-radius: 10px;
 }
 
+#statBox {
+  display: flex;
+  float: left;
+}
+
 #metaBox {
   grid-column: 1;
   grid-row: 1;
-  display: flex;
+  display: grid;
+  grid-template-columns: 20vw 18vw 14vw 10vw 18vw 20vw;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+  width: 100vw;
+}
+#metaBox #damBox {
+  border-left: 1px solid black;
+  padding-left: 10px;
+  margin-left: 10px;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 2em 2em;
+}
+#metaBox #damBox p {
+  grid-column: 1;
+  grid-row: 1;
+}
+#metaBox #damBox .labelImportant {
+  font-weight: bold;
+}
+#metaBox #damBox .microCon {
+  grid-row: 1;
+  text-align: center;
+}
+#metaBox #damBox .microCon input {
+  width: 2em;
+  text-align: center;
+}
+#metaBox #tpContainer {
+  border-left: 1px solid black;
+  padding-left: 10px;
+  margin-left: 10px;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 2em 2em;
+}
+#metaBox #tpContainer p {
+  grid-column: 1;
+  grid-row: 1;
+}
+#metaBox #tpContainer .labelImportant {
+  font-weight: bold;
+}
+#metaBox #tpContainer .microCon {
+  grid-row: 1;
+  text-align: center;
+}
+#metaBox #tpContainer .microCon input {
+  width: 2em;
+  text-align: center;
+}
+#metaBox #determinationDiv {
+  border-left: 1px solid black;
+  padding-left: 10px;
+  margin-left: 10px;
+  text-align: center;
+}
+#metaBox #determinationDiv input {
+  width: 2em;
+  text-align: center;
 }
 
 #importBoxDiv {
@@ -55,27 +120,45 @@ input {
   grid-row: 3;
 }
 
+#hRule {
+  height: 20px;
+  color: black;
+  width: 100vw;
+}
+
 #sheet {
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 40% 60%;
   grid-template-rows: 10vh 95vh 30vh;
   display: grid;
 }
 #sheet #auxCounter {
+  float: right;
   width: 20vw;
-  float: left;
   font-size: 1.5em;
+  grid-column: 6;
 }
 #sheet #charnameBox {
   width: 20vw;
   float: left;
+  padding-right: 0.5em;
 }
 #sheet #hpBox {
-  width: 20vw;
+  width: 5em;
+  text-align: center;
   float: left;
 }
+#sheet #hpBox #charHP {
+  width: 2em;
+  text-align: center;
+}
 #sheet #armorBox {
-  width: 20vw;
+  width: 5em;
+  text-align: center;
   float: left;
+}
+#sheet #armorBox #charArmor {
+  width: 2em;
+  text-align: center;
 }
 #sheet hr {
   width: 100vw !important;
@@ -129,30 +212,39 @@ input {
 }
 
 #charData {
-  width: 40vw;
   padding: 0px !important;
   margin: 0px !important;
+  padding-top: 1em !important;
   float: left;
   display: grid;
   grid-column: 2;
   grid-row: 2;
   font-size: 1em;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 5vh 30vh 30vh 30vh 30vh;
+  grid-template-rows: 5vh 27vh 27vh 27vh 27vh;
 }
 #charData .dataItem {
   display: flex;
-  width: 100%;
-  height: 3em;
-  margin-top: 20px;
+  height: 3.7em;
+  margin-top: 8px;
+  background-color: #34a853;
+  border-right: 3px solid white;
+  border-radius: 10px;
 }
 #charData .dataItem p {
   width: 30%;
+  color: white;
+  padding-left: 10px;
 }
 #charData .dataItem .input {
   font-size: 0.9em;
   width: 65%;
-  height: 100%;
+  background-color: white;
+  color: black;
+  appearance: none;
+  border: 1px solid black;
+  resize: none;
+  border-radius: 10px;
 }
 #charData .dataItemTitle {
   display: flex;
@@ -197,42 +289,54 @@ input {
 #stats {
   grid-column: 1;
   grid-row: 2;
-  width: 55vw;
   height: 100vh;
 }
+#stats .offenseSub {
+  background-color: #a61c00;
+}
+#stats .defenseSub {
+  background-color: #3c78d8;
+}
+#stats .supportSub {
+  background-color: #f1c232;
+}
 #stats .subGrid {
-  width: 18vw;
+  width: 13vw;
   margin: 0px;
   padding: 0px;
   float: left;
+  text-align: center;
 }
 #stats .subGrid div {
-  background-color: white;
-  height: 3.2vh;
+  border-radius: 10px;
+  height: 5.5vh;
   margin-bottom: 1em;
   margin-right: 0.5em;
-  display: flex;
+  display: block;
+  text-align: center;
 }
-#stats .subGrid p {
-  margin-bottom: 0px !important;
-  margin-top: 5px !important;
-  font-size: 1em;
+#stats .subGrid div p {
+  background-color: rgba(0, 0, 0, 0.832);
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-bottom: 0.2em !important;
+  margin-top: 0.2em !important;
+  font-size: 0.9em;
   font-weight: bold;
-  width: 75%;
-  padding-left: 1em;
 }
-#stats .subGrid .seler {
+#stats .subGrid div .seler {
+  appearance: none;
   padding-bottom: 0px !important;
   margin-bottom: 0px !important;
   padding: 0px;
   margin: 0px;
-  background-color: rgba(0, 0, 0, 0.208);
+  background-color: white(0, 0, 0, 0.208);
   color: black;
   font-size: 1em;
   font-weight: bold;
   border: none;
-  float: left;
-  height: 100%;
+  text-align: center;
 }
 
 #footer {
