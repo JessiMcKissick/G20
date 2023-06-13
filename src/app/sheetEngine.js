@@ -357,17 +357,23 @@ function loadState(state) {
     for(let i = 0; i < occupation.length;i++){
         pullID('Occupation' + i).value = occupation[i];
     }
-    for (let i = 0; i < feature.length; i++) {
-        pullID('Feature' + i).value = feature[i];
+    for (let i = 0; i < feature.length; i++) { ////////////////////
+        pullID('Feature' + i).value = feature[i][0];
+        pullID('Feature' + i + 'pre').value = feature[i][1];
+
     }
-    for (let i = 0; i < technique.length; i++) {
-        pullID('Technique' + i).value = technique[i];
+    for (let i = 0; i < technique.length; i++) {//////////////////////////
+        pullID('Technique' + i).value = technique[i][0];
+        pullID('Technique' + i + 'pre').value = technique[i][1];
+
     }
     for (let i = 0; i < knowledge.length; i++) {
         pullID('Knowledge' + i).value = knowledge[i];
     }
-    for (let i = 0; i < special.length; i++) {
-        pullID('Special' + i).value = special[i];
+    for (let i = 0; i < special.length; i++) {///////////////////////////////
+        pullID('Special' + i).value = special[i][0];
+        pullID('Special' + i + 'pre').value = special[i][1];
+
     }
     pullID('Title').value = state.title;
     pullID('rankSel').value = state.rank;
@@ -421,36 +427,42 @@ function generateObject() {
     var special = [];
 
     for (let i = 0; i < offenseList.length; i++) {
-        let state = val('selefOf' + [i]);
+        let state = pullID('selerOf'+i).value;
         off.push(state);
     }
     for (let i = 0; i < defenseList.length; i++) {
-        let state = val('selefDe' + [i]);
+        let state = pullID('selerDe' + i).value;
         def.push(state);
     }
     for (let i = 0; i < supportList.length; i++) {
-        let state = val('selefSu' + [i]);
+        let state = pullID('selerSu' + [i]).value;
         sup.push(state);
     }
     for (let i = 0; i < 3; i++) {
-        let state = val('Occupation' + [i]);
+        let state = pullID('Occupation' + i).value;
         occupation.push(state);
     }
     for (let i = 0; i < 3; i++) {
-        let state = val('Feature' + [i]);
-        feature.push(state);
+        let state = pullID('Feature' + i).value;
+        let stateTitle = pullID('Feature' + i + 'pre').value;
+        let pair = [state, stateTitle];
+        feature.push(pair);
     }
     for (let i = 0; i < 3; i++) {
-        let state = val('Technique' + [i]);
-        technique.push(state);
+        let state = pullID('Technique' + i).value;
+        let stateTitle = pullID('Technique' + i + 'pre').value;
+        let pair = [state, stateTitle];
+        technique.push(pair);
     }
     for (let i = 0; i < 3; i++) {
-        let state = val('Knowledge' + [i]);
+        let state = pullID('Knowledge'+i).value;
         knowledge.push(state);
     }
     for (let i = 0; i < 3; i++) {
-        let state = val('Special' + [i]);
-        special.push(state);
+        let state = pullID('Special' + i).value;
+        let stateTitle = pullID('Special' + i + 'pre').value;
+        let pair = [state, stateTitle];
+        special.push(pair);
     }
 
     saveObj.name = val('charName')

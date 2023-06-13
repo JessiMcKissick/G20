@@ -17,7 +17,8 @@ let val = (id, inpval) => {
     if(inpval != undefined && inpval != ''){
         pullID(id).value = inpval;
     } else {
-        return pullID(id).value;
+        let dat = pullID(id).value;
+        return dat;
     }
 }
 let body = pullID('root');
